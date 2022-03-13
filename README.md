@@ -18,27 +18,34 @@ Your task is to:
 
 1. Pick an issue that doesn't have an implementor yet. An implementor here
    is indicated in a comment, like "I'm working on this task.". 
-1. **Fork the repository** (button in the upper right corner of the main page).
-1. **On the fork**, create a feature branch with a name following a convention:
+1. Clone this repository.
+   ```
+   $ git clone ssh://git@github.com/EPAM-Online-Courses/teatrees-jap7.git
+   ```
+1. Create a feature branch with a name following a convention:
    ```
    issueID-short-but-meaningful-description-written-in-kebab-case
    ```
    For example:
    ```
-   999-implement-realtime-interaction
+   $ git switch -c 999-implement-realtime-interaction
    ```
    (Don't put `#` in the name of the branch.)
-1. Implement the feature **on your fork**.
-1. Push the changes to a remote feature branch **on your fork**.
-1. Create a Pull Request to merge it to `EPAM-Online-Courses/tetris:master`.
+1. Implement the feature **on that feature branch**.
+   ```
+   ## edit/create the necessary files
+   $ git add file1 file2 ...
+   $ git commit
+   ```
+1. Push the changes to a remote feature branch **with the same name**.
+   ```
+   $ git push origin issueID-your-feature-branch-name
+   ```
+1. Create a Pull Request, so that it can be merged to `master`. (Do not merge it yourself!)
 
 **IMPORTANT!**
 
-YOU WILL NOW BE WORKING ON THE FORKED REPO, NOT ON THIS ONE, BUT ON YOUR GITHUB
-COPY OF IT, CALLED THE FORK. WE REPEAT, YOU WILL NOW BE WORKING ON THE FORK.
-
-Commands and task steps to do ON THE FORK. It's to be done ON THE FORK, ok?
-NOT HERE, NOT IN YOUR LOCAL REPOSITORY.
+YOU WILL NOW BE WORKING ON THE **SHARED** REPO. NOT A FORK, BUT THIS REPO.
 
 ## Rules
 
@@ -46,13 +53,13 @@ NOT HERE, NOT IN YOUR LOCAL REPOSITORY.
 1. Each single commit shall contain:
    
    * a consistent, working set of changes,
-   * a set of tests that prove the changes actually work,
+   * a set of tests that proves the changes actually work,
    * a documentation attached to public API,
    * a commit message reasonably explaining the changes.
 
 1. You shall touch only those classes that are necessary for the purpose
    of resolving the issue. Too wide, especially unrelated changes will cause
-   the PR to be rejected.
+   the PR to be **rejected**.
 1. PR will also be rejected if:
    * there are unresolved conflicts,
    * there are no tests,
@@ -67,11 +74,5 @@ NOT HERE, NOT IN YOUR LOCAL REPOSITORY.
    1. Search for a bug, and if such is found, report an issue and create a PR that fixes it.
    1. Propose a new functionality (as an issue with a user story and criteria of acceptance).
    1. Do nothing - the task considered not done.
-1. If you're done with your task, you can take another one (and get additional points).
+1. If you're done with your task, you can take another one or help other team members with their tasks.
 1. Feel free to add missing tests and Javadocs for the existing functionality.
-
-## Grading
-
-1. Every successfully merged PR is worth 10 points.
-1. Every new, passing and meaningful test is worth 1 point.
-1. Every added and meaningful Javadoc is worth 1 point.
