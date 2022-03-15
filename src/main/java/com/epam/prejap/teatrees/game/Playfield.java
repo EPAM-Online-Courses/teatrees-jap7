@@ -23,6 +23,14 @@ public class Playfield {
         grid = new byte[this.rows][this.cols];
     }
 
+    public Playfield(byte[][] grid, BlockFeed feed, Printer printer) {
+        this.rows = grid.length;
+        this.cols = grid[0].length;
+        this.feed = feed;
+        this.printer = printer;
+        this.grid = grid;
+    }
+
     public void nextBlock() {
         block = feed.nextBlock();
         row = 0;
@@ -103,6 +111,29 @@ public class Playfield {
                 }
             }
         }
+    }
+
+    public void removeCompleteLines() {
+        for (int i = rows - 1; i >= 0; i--)
+        {
+            if (isRowComplete(i)) dropRows(i - 1);
+        }
+    }
+
+    private void dropRows(int i) {
+        while (i >= 0)
+        {
+            grid[i +1] = grid[i];
+            i--;
+        }
+    }
+
+    private boolean isRowComplete(int row) {
+        for (int i = 0; i < cols; i++)
+        {
+            if (grid[row][i] == 0) return false;
+        }
+        return true;
     }
 
     private interface BrickAction {
