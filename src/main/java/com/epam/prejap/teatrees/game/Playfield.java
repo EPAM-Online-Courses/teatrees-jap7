@@ -123,7 +123,10 @@ public class Playfield {
     private void dropRows(int i) {
         while (i >= 0)
         {
-            grid[i +1] = grid[i];
+            for (int j = 0; j < cols; j++)
+            {
+                grid[i + 1][j] = grid[i][j];
+            }
             i--;
         }
     }

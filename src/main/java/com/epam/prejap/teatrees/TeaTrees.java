@@ -36,6 +36,8 @@ class TeaTrees {
                 moved |= (nextMove = playfield.move(move));
             } while (nextMove);
 
+            playfield.removeCompleteLines();
+
         } while (moved);
 
         return new Score(score);

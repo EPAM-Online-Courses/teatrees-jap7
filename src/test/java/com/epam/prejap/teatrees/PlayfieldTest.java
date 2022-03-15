@@ -3,7 +3,6 @@ package com.epam.prejap.teatrees;
 import com.epam.prejap.teatrees.block.BlockFeed;
 import com.epam.prejap.teatrees.game.Playfield;
 import com.epam.prejap.teatrees.game.Printer;
-import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -19,7 +18,8 @@ public class PlayfieldTest {
         // when
         playfield.removeCompleteLines();
         // then
-        Assert.assertEquals(grid, expectedGrid);
+        assertEquals(grid, expectedGrid);
+
     }
 
     @DataProvider
