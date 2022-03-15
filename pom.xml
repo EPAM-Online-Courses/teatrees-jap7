@@ -6,7 +6,7 @@
 
     <groupId>com.epam.prejap</groupId>
     <artifactId>tea-trees</artifactId>
-    <version>0.1</version>
+    <version>0.2</version>
 
     <properties>
         <version.java>17</version.java>
@@ -16,7 +16,7 @@
         <version.maven>3.8.1</version.maven>
         <version.plugin.maven.enforcer>3.0.0-M2</version.plugin.maven.enforcer>
         <version.plugin.maven.jar>3.2.0</version.plugin.maven.jar>
-        <version.testng>7.4.0</version.testng>
+        <version.testng>7.5</version.testng>
     </properties>
 
     <dependencies>
