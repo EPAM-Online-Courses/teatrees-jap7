@@ -23,7 +23,7 @@ public class Playfield {
         grid = new byte[this.rows][this.cols];
     }
 
-    public Playfield(byte[][] grid, BlockFeed feed, Printer printer) {
+    Playfield(byte[][] grid, BlockFeed feed, Printer printer) {
         this.rows = grid.length;
         this.cols = grid[0].length;
         this.feed = feed;
