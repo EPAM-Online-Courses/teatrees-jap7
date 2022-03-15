@@ -6,7 +6,7 @@
 
     <groupId>com.epam.prejap</groupId>
     <artifactId>tea-trees</artifactId>
-    <version>0.1</version>
+    <version>0.2</version>
 
     <properties>
         <version.java>17</version.java>
@@ -38,7 +38,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>com.epam.prejap.tetris.Tetris</mainClass>
+                            <mainClass>com.epam.prejap.teatreessxss.TeaTrees</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
