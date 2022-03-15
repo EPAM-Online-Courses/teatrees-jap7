@@ -61,6 +61,7 @@ public class TeaTrees {
         var playfield = new Playfield(rows, cols, feed, printer);
         var game = new TeaTrees(playfield, new Waiter(delay), new RandomPlayer());
 
+        printer.printWelcomeMsg();
         var score = game.play();
 
         System.out.println("Score: " + score.points());
