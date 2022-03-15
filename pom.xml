@@ -14,6 +14,7 @@
         <maven.compiler.source>${version.java}</maven.compiler.source>
         <maven.compiler.target>${version.java}</maven.compiler.target>
         <version.maven>3.8.1</version.maven>
+        <version.plugin.maven.surefire>2.22.2</version.plugin.maven.surefire>
         <version.plugin.maven.enforcer>3.0.0-M2</version.plugin.maven.enforcer>
         <version.plugin.maven.jar>3.2.0</version.plugin.maven.jar>
         <version.testng>7.4.0</version.testng>
@@ -38,9 +39,20 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>com.epam.prejap.teatreessxss.TeaTrees</mainClass>
+                            <mainClass>com.epam.prejap.teatrees.TeaTrees</mainClass>
                         </manifest>
                     </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${version.plugin.maven.surefire}</version>
+                <configuration>
+                    <includes>
+                        <include>**/*Test.java</include>
+                        <include>**/*IT.java</include>
+                    </includes>
                 </configuration>
             </plugin>
             <plugin>
