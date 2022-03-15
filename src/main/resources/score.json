@@ -1,0 +1,36 @@
+{
+  "records": [
+    {
+      "name": "and",
+      "score": "1000"
+    },
+    {
+      "name": "pol",
+      "score": "1040"
+    },
+    {
+      "name": "ang",
+      "score": "100340"
+    },
+    {
+      "name": "chi",
+      "score": "10"
+    },
+    {
+      "name": "usa",
+      "score": "4000"
+    },
+    {
+      "name": "ada",
+      "score": "400"
+    },
+    {
+      "name": "rus",
+      "score": "1000"
+    },
+    {
+      "name": "cad",
+      "score": "1400"
+    }
+  ]
+}
