@@ -10,8 +10,20 @@ import static org.testng.Assert.*;
 
 public class PlayfieldTest {
 
-    @Test(dataProvider = "gridProvider")
-    public void shouldRemoveCompleteLine(byte[][] grid, byte[][] expectedGrid)
+    @Test(dataProvider = "gridWithCompleteLinesProvider")
+    public void shouldRemoveCompleteLines(byte[][] grid, byte[][] expectedGrid)
+    {
+        // given
+        Playfield playfield = new Playfield(grid, new BlockFeed(), new Printer(System.out));
+        // when
+        playfield.removeCompleteLines();
+        // then
+        assertEquals(grid, expectedGrid);
+
+    }
+
+    @Test(dataProvider = "gridWithoutCompleteLinesProvider")
+    public void shouldNotRemoveAnyLines(byte[][] grid, byte[][] expectedGrid)
     {
         // given
         Playfield playfield = new Playfield(grid, new BlockFeed(), new Printer(System.out));
@@ -23,12 +35,23 @@ public class PlayfieldTest {
     }
 
     @DataProvider
-    public Object[][] gridProvider()
+    public Object[][] gridWithCompleteLinesProvider()
     {
         return new Object[][] {
                 {new byte[][] {{0,0}, {1,1}}, new byte[][] {{0,0}, {0,0}}},
                 {new byte[][] {{0,0,0},{1,0,1},{1,1,1}}, new byte[][] {{0,0,0},{0,0,0},{1,0,1}}},
                 {new byte[][] {{0,0,0},{1,1,1},{1,0,1}}, new byte[][] {{0,0,0},{0,0,0},{1,0,1}}},
+                {new byte[][] {{0,1,0},{1,1,1},{1,1,1}}, new byte[][] {{0,0,0},{0,0,0},{0,1,0}}},
+        };
+    }
+
+    @DataProvider
+    public Object[][] gridWithoutCompleteLinesProvider()
+    {
+        return new Object[][] {
+                {new byte[][] {{0,0}, {1,0}}, new byte[][] {{0,0}, {1,0}}},
+                {new byte[][] {{0,0,0},{1,0,1},{0,1,1}}, new byte[][] {{0,0,0},{1,0,1},{0,1,1}}},
+                {new byte[][] {{0,0,0},{0,0,1},{1,0,1}}, new byte[][] {{0,0,0},{0,0,1},{1,0,1}}},
         };
     }
 }

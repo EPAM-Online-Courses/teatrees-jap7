@@ -116,7 +116,11 @@ public class Playfield {
     public void removeCompleteLines() {
         for (int i = rows - 1; i >= 0; i--)
         {
-            if (isRowComplete(i)) dropRows(i - 1);
+            if (isRowComplete(i))
+            {
+                dropRows(i - 1);
+                i++;
+            }
         }
     }
 
@@ -128,6 +132,10 @@ public class Playfield {
                 grid[i + 1][j] = grid[i][j];
             }
             i--;
+        }
+        for (int j = 0; j < cols; j++)
+        {
+            grid[0][j] = 0;
         }
     }
 
