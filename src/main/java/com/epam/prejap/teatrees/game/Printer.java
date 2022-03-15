@@ -28,7 +28,7 @@ public class Printer {
     }
 
     void print(byte dot) {
-        out.format(dot == 0 ? " " :"#");
+        out.format(dot == 0 ? " " : "#");
     }
 
     void startRow() {
@@ -41,5 +41,20 @@ public class Printer {
 
     void border(int width) {
         out.println("+" + "-".repeat(width) + "+");
+    }
+
+    public void printWelcomeMsg() {
+        out.println("""
+                _|          _|              _|                                                   \s
+                _|          _|     _|_|     _|     _|_|_|     _|_|     _|_|_|  _|_|       _|_|   \s
+                _|    _|    _|   _|_|_|_|   _|   _|         _|    _|   _|    _|    _|   _|_|_|_| \s
+                  _|  _|  _|     _|         _|   _|         _|    _|   _|    _|    _|   _|       \s
+                    _|  _|         _|_|_|   _|     _|_|_|     _|_|     _|    _|    _|     _|_|_| \s
+                """);
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            System.err.println(e.getMessage());
+        }
     }
 }
