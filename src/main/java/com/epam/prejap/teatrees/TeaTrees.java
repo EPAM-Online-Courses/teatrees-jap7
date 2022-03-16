@@ -54,10 +54,10 @@ class TeaTrees {
         var game = new TeaTrees(playfield, new Waiter(delay), new RandomPlayer());
 
         var score = game.play();
-        Result.concludeTheGame(score.points());
 
+        Result result = new Result();
+        result.concludeTheGame(score.points());
 
-        System.out.println("Score: " + score.points());
     }
 
 }

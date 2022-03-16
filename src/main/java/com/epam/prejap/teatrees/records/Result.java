@@ -8,17 +8,24 @@ import java.util.Scanner;
  */
 public class Result {
 
-    public static void concludeTheGame(int score){
-        System.out.println("Type your name (only 3 letters allowed): ");
+    public void concludeTheGame(int score) {
+        String nameOfThePlayer = getUserName();
+        boolean isNewBestRecord = new RecordHandler().handleNewRecord(new Record(nameOfThePlayer, score));
+        System.out.println("\nScore: " + score);
+        if (isNewBestRecord) {
+            System.out.println("Congrats! It's your new record " + nameOfThePlayer + "!");
+        }
+    }
+
+    private String getUserName() {
         Scanner scanner = new Scanner(System.in);
+        
+        System.out.println("Type your name (only 3 letters allowed): ");
         String nameOfThePlayer = scanner.nextLine();
-        while(nameOfThePlayer.length()!=3){
+        while (nameOfThePlayer.length() != 3) {
             System.out.println("Retype your name! Only 3 letters are allowed!:");
             nameOfThePlayer = scanner.nextLine();
         }
-        boolean isNewBest = new RecordHandler().handleNewRecord(new Record(nameOfThePlayer,score));
-        if(isNewBest) {
-            System.out.println("Congrats! It's your new record " + nameOfThePlayer +"!");
-        }
+        return nameOfThePlayer;
     }
 }
