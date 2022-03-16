@@ -3,7 +3,6 @@ package com.epam.prejap.teatrees.scores;
 import java.io.File;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * @author Andrzej Sadlek
@@ -40,5 +39,8 @@ public class RecordHandler {
         return false;
     }
 
-
+    public void updateStore() {
+        parser.updateStore(recordsList);
+        parser.updateJsonFile();
+    }
 }

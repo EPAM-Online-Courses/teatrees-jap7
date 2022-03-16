@@ -15,6 +15,12 @@ public class ScoreRecord {
         return new ArrayList<>(records);
     }
 
+    public void update(List<Record> newRecords) {
+        if (records != null){
+            records = newRecords;
+        }
+    }
+
     public ScoreRecord(List<Record> records) {
         this.records = records;
     }

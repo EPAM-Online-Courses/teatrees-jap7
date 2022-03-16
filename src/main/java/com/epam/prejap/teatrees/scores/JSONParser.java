@@ -6,7 +6,6 @@ import java.io.*;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * @author Andrzej Sadlek
@@ -14,6 +13,7 @@ import java.util.Objects;
  */
 public class JSONParser {
     private List<Record> recordsList;
+    private ScoreRecord storeRecord;
     File jsonFile;
 
     public JSONParser(File fileToParse) {
@@ -32,13 +32,8 @@ public class JSONParser {
 
     private void uploadDataFromJson() throws IOException {
         String parsedJSONData = new String(Files.readAllBytes(jsonFile.toPath()));
-        ScoreRecord jsonDataContainer = new Gson().fromJson(parsedJSONData, ScoreRecord.class);
-        recordsList = jsonDataContainer.getRecords();
-    }
-
-    void updateJsonFile(ScoreRecord scoreRecord) {
-        clear();
-        addNewRecordsToJSON(scoreRecord);
+        storeRecord = new Gson().fromJson(parsedJSONData, ScoreRecord.class);
+        recordsList = storeRecord.getRecords();
     }
 
     private void addNewRecordsToJSON(ScoreRecord scoreRecord){
@@ -51,6 +46,15 @@ public class JSONParser {
 
     }
 
+    void updateStore(List<Record> record){
+        storeRecord.update(record);
+    }
+
+    void updateJsonFile() {
+        clear();
+        addNewRecordsToJSON(storeRecord);
+    }
+
     private void clear() {
 
         try (FileWriter writer = new FileWriter(jsonFile);){
@@ -59,12 +63,6 @@ public class JSONParser {
         } catch (IOException e) {
             System.err.println("Cannot clear score.json file");
         }
-    }
-
-    public static void main(String[] args) {
-//        File jsonFile = new File(Objects.requireNonNull(RecordHandler.class.getClassLoader().getResource("score.json")).getFile());
-//        JSONParser parser = new JSONParser(jsonFile);
-//        parser.updateJsonFile(new ArrayList<>());
     }
 
 }
