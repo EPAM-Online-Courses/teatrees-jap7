@@ -16,7 +16,7 @@ class ScoreRecord {
     }
 
     void update(List<Record> newRecords) {
-        if (records != null) {
+        if (newRecords != null) {
             records = newRecords;
         }
     }

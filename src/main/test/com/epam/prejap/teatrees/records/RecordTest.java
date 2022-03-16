@@ -1,7 +1,6 @@
 package com.epam.prejap.teatrees.records;
 
 import org.testng.annotations.Test;
-
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
