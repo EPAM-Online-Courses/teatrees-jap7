@@ -59,6 +59,9 @@ public class TBlockTest {
         assertEquals(first2Lines, result);
     }
 
+    /**
+     * Checks if the shape of T-block is correct both in columns and rows
+     */
     public void shouldHave3Columns() {
         //given
         int columnsNumber = 3;
