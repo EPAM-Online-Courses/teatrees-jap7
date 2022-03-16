@@ -60,7 +60,7 @@ public class TBlockTest {
     }
 
     /**
-     * Checks if the shape of T-block is correct both in columns and rows
+     * Checks if the shape of T-block is correct in terms of columns.
      */
     public void shouldHave3Columns() {
         //given
