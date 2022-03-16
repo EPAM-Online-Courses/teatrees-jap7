@@ -15,8 +15,12 @@ public class BlockFeed {
     public BlockFeed() {
     }
 
-    public Block nextBlock() {
-        return blocks.get(rnd.nextInt(blocks.size())).get();
+    public Block nextBlock(int... index) {
+        if (index.length == 0) {
+            return blocks.get(rnd.nextInt(blocks.size())).get();
+        } else {
+            return blocks.get(index[0]).get();
+        }
     }
 
 }

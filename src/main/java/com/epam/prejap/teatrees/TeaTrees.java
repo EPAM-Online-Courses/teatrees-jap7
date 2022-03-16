@@ -8,7 +8,7 @@ import com.epam.prejap.teatrees.game.Waiter;
 import com.epam.prejap.teatrees.player.Player;
 import com.epam.prejap.teatrees.player.RandomPlayer;
 
-class TeaTrees {
+public class TeaTrees {
 
     private final Playfield playfield;
     private final Waiter waiter;
@@ -20,13 +20,17 @@ class TeaTrees {
         this.player = player;
     }
 
-    public Score play() {
+    public Score play(int... index) {
         boolean moved;
         int score = 0;
         do {
             moved = false;
 
-            playfield.nextBlock();
+            if (index.length == 0) {
+                playfield.nextBlock();
+            } else {
+                playfield.nextBlock(index[0]);
+            }
             score++;
 
             boolean nextMove;
