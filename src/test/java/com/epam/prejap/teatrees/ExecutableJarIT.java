@@ -11,6 +11,7 @@ import java.security.CodeSource;
 import java.util.List;
 import java.util.jar.JarFile;
 
+@Test
 public class ExecutableJarIT {
 
     private static final String MAIN_CLASS_FQN = TeaTrees.class.getName();
@@ -28,7 +29,6 @@ public class ExecutableJarIT {
         }
     }
 
-    @Test
     public void testJARisCreated() throws IOException {
         long expected = 0;
         long actual = Files.walk(Path.of(CLASSPATH),1).map(f -> f.getFileName().toString())
@@ -36,7 +36,6 @@ public class ExecutableJarIT {
         Assert.assertNotEquals(actual,expected, "Expected to find more than 0 .jar files");
     }
 
-    @Test
     public void jarFileContainsManifestFile() throws IOException {
         List<Path> paths = Files.
                 walk(Path.of(CLASSPATH), 1)
@@ -49,7 +48,6 @@ public class ExecutableJarIT {
         }
     }
 
-    @Test
     public void manifestFileContainsMainClass() throws IOException {
         String expected = MAIN_CLASS_FQN;
         List<Path> paths = Files.
@@ -63,4 +61,4 @@ public class ExecutableJarIT {
             Assert.assertEquals(actual,expected);
         }
     }
-};
+}
