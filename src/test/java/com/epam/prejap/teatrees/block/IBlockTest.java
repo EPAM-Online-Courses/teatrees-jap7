@@ -1,7 +1,5 @@
-package com.epam.prejap.teatrees;
+package com.epam.prejap.teatrees.block;
 
-import com.epam.prejap.teatrees.block.Block;
-import com.epam.prejap.teatrees.block.IBlock;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
