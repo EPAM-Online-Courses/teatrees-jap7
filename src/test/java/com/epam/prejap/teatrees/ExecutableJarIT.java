@@ -1,6 +1,5 @@
 package com.epam.prejap.teatrees;
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.*;
@@ -10,6 +9,8 @@ import java.nio.file.Path;
 import java.security.CodeSource;
 import java.util.List;
 import java.util.jar.JarFile;
+
+import static org.testng.Assert.*;
 
 @Test
 public class ExecutableJarIT {
@@ -33,7 +34,7 @@ public class ExecutableJarIT {
         long expected = 0;
         long actual = Files.walk(Path.of(CLASSPATH),1).map(f -> f.getFileName().toString())
                 .filter(file -> file.endsWith(JAR_EXTENSION)).count();
-        Assert.assertNotEquals(actual,expected, "Expected to find more than 0 .jar files");
+        assertNotEquals(actual,expected, "Expected to find more than 0 .jar files");
     }
 
     public void jarFileContainsManifestFile() throws IOException {
@@ -44,7 +45,7 @@ public class ExecutableJarIT {
                 .toList();
         for (Path path : paths) {
             JarFile jarFile = new JarFile(String.valueOf(path));
-            Assert.assertNotNull(jarFile.getManifest(), "MANIFEST.MF does not exist");
+            assertNotNull(jarFile.getManifest(), "MANIFEST.MF does not exist");
         }
     }
 
@@ -58,7 +59,7 @@ public class ExecutableJarIT {
         for (Path path : paths) {
             JarFile jarFile = new JarFile(String.valueOf(path));
             String actual = jarFile.getManifest().getMainAttributes().getValue("Main-Class");
-            Assert.assertEquals(actual,expected);
+            assertEquals(actual,expected);
         }
     }
 }
