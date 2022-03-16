@@ -1,4 +1,4 @@
-package com.epam.prejap.teatrees.scores;
+package com.epam.prejap.teatrees.records;
 
 import com.google.gson.Gson;
 
@@ -36,8 +36,8 @@ public class JSONParser {
         recordsList = storeRecord.getRecords();
     }
 
-    private void addNewRecordsToJSON(ScoreRecord scoreRecord){
-        try(FileWriter writer = new FileWriter(jsonFile);){
+    private void addNewRecordsToJSON(ScoreRecord scoreRecord) {
+        try (FileWriter writer = new FileWriter(jsonFile);) {
             Gson gson = new Gson();
             gson.toJson(scoreRecord, writer);
         } catch (IOException e) {
@@ -46,8 +46,9 @@ public class JSONParser {
 
     }
 
-    void updateStore(List<Record> record){
+    void updateStore(List<Record> record) {
         storeRecord.update(record);
+        updateJsonFile();
     }
 
     void updateJsonFile() {
@@ -57,7 +58,7 @@ public class JSONParser {
 
     private void clear() {
 
-        try (FileWriter writer = new FileWriter(jsonFile);){
+        try (FileWriter writer = new FileWriter(jsonFile);) {
             writer.write("");
             writer.flush();
         } catch (IOException e) {

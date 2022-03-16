@@ -1,4 +1,4 @@
-package com.epam.prejap.teatrees.scores;
+package com.epam.prejap.teatrees.records;
 
 import java.util.ArrayList;
 import java.util.List;

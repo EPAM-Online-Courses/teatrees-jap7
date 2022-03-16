@@ -7,6 +7,7 @@ import com.epam.prejap.teatrees.game.Printer;
 import com.epam.prejap.teatrees.game.Waiter;
 import com.epam.prejap.teatrees.player.Player;
 import com.epam.prejap.teatrees.player.RandomPlayer;
+import com.epam.prejap.teatrees.records.Result;
 
 class TeaTrees {
 
@@ -52,6 +53,8 @@ class TeaTrees {
         var game = new TeaTrees(playfield, new Waiter(delay), new RandomPlayer());
 
         var score = game.play();
+        Result.concludeTheGame(score.points());
+
 
         System.out.println("Score: " + score.points());
     }

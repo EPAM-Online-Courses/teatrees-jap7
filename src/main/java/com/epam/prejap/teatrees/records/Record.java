@@ -1,4 +1,4 @@
-package com.epam.prejap.teatrees.scores;
+package com.epam.prejap.teatrees.records;
 
 import java.util.Objects;
 
@@ -17,7 +17,7 @@ public class Record implements Comparable<Record>{
 
     @Override
     public String toString() {
-        return "name is " + name + " score " + score;
+        return "<<<player: " + name + ", top score: " + score + ">>>";
     }
 
     @Override
