@@ -4,10 +4,7 @@ import com.epam.prejap.teatrees.block.Block;
 import com.epam.prejap.teatrees.block.BlockFeed;
 
 public class Playfield {
-
-    private final byte[][] grid;
-    private final int rows;
-    private final int cols;
+    private final Grid grid;
     private final Printer printer;
     private final BlockFeed feed;
 
@@ -16,25 +13,21 @@ public class Playfield {
     private int col;
 
     public Playfield(int rows, int cols, BlockFeed feed, Printer printer) {
-        this.rows = rows;
-        this.cols = cols;
         this.feed = feed;
         this.printer = printer;
-        grid = new byte[this.rows][this.cols];
+        grid = new Grid(rows, cols);
     }
 
     Playfield(byte[][] grid, BlockFeed feed, Printer printer) {
-        this.rows = grid.length;
-        this.cols = grid[0].length;
         this.feed = feed;
         this.printer = printer;
-        this.grid = grid;
+        this.grid = new Grid(grid);
     }
 
     public void nextBlock() {
         block = feed.nextBlock();
         row = 0;
-        col = (cols - block.cols()) / 2;
+        col = (grid.cols() - block.cols()) / 2;
         show();
     }
 
@@ -79,7 +72,7 @@ public class Playfield {
                 if (dot > 0) {
                     int newRow = row + i + rowOffset;
                     int newCol = col + j + colOffset;
-                    if (newRow >= rows || newCol >= cols || grid[newRow][newCol] > 0) {
+                    if (newRow >= grid.rows() || newCol >= grid.cols() || grid.cellAt(newRow, newCol) > 0) {
                         return false;
                     }
                 }
@@ -89,12 +82,12 @@ public class Playfield {
     }
 
     private void hide() {
-        forEachBrick((i, j, dot) -> grid[row + i][col + j] = 0);
+        forEachBrick((i, j, dot) -> grid.setCell(row + i, col + j, 0));
     }
 
     private void show() {
-        forEachBrick((i, j, dot) -> grid[row + i][col + j] = dot);
-        printer.draw(grid);
+        forEachBrick((i, j, dot) -> grid.setCell(row + i,col + j, dot));
+        printer.draw(grid.grid());
     }
 
     private void doMove(int rowOffset, int colOffset) {
@@ -114,37 +107,7 @@ public class Playfield {
     }
 
     public void removeCompleteLines() {
-        for (int i = rows - 1; i >= 0; i--)
-        {
-            if (isRowComplete(i))
-            {
-                dropRows(i - 1);
-                i++;
-            }
-        }
-    }
-
-    private void dropRows(int i) {
-        while (i >= 0)
-        {
-            for (int j = 0; j < cols; j++)
-            {
-                grid[i + 1][j] = grid[i][j];
-            }
-            i--;
-        }
-        for (int j = 0; j < cols; j++)
-        {
-            grid[0][j] = 0;
-        }
-    }
-
-    private boolean isRowComplete(int row) {
-        for (int i = 0; i < cols; i++)
-        {
-            if (grid[row][i] == 0) return false;
-        }
-        return true;
+        grid.removeCompleteLines();
     }
 
     private interface BrickAction {
