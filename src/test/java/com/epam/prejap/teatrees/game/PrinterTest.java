@@ -14,7 +14,7 @@ public class PrinterTest {
     private static ByteArrayOutputStream output;
 
     @BeforeMethod
-    private static void setUpStreams() {
+    private void setUpStreams() {
         originalPrintStream = System.out;
         output = new ByteArrayOutputStream();
         capturedPrintStream = new PrintStream(output);
