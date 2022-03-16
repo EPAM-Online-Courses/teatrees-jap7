@@ -14,7 +14,7 @@ public class PrinterTest {
     private static ByteArrayOutputStream output;
 
     @BeforeMethod
-    public static void setUpStreams() {
+    private static void setUpStreams() {
         originalPrintStream = System.out;
         output = new ByteArrayOutputStream();
         capturedPrintStream = new PrintStream(output);
@@ -27,7 +27,7 @@ public class PrinterTest {
     }
 
     @Test
-    void shouldPrintWelcomeMsg() {
+    public void shouldPrintWelcomeMsg() {
         // given
         Printer printer = new Printer(new PrintStream(capturedPrintStream));
         String expected = """
