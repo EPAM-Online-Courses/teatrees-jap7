@@ -23,8 +23,12 @@ public class Playfield {
         grid = new byte[this.rows][this.cols];
     }
 
-    public void nextBlock() {
-        block = feed.nextBlock();
+    public void nextBlock(int... index) {
+        if (index.length == 0) {
+            block = feed.nextBlock();
+        } else {
+            block = feed.nextBlock(index[0]);
+        }
         row = 0;
         col = (cols - block.cols()) / 2;
         show();

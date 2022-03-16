@@ -8,14 +8,19 @@ public class BlockFeed {
 
     private final Random rnd = new Random();
     private final List<Supplier<Block>> blocks = List.of(
-        OBlock::new
+        OBlock::new,
+        TBlock::new
     );
 
     public BlockFeed() {
     }
 
-    public Block nextBlock() {
-        return blocks.get(rnd.nextInt(blocks.size())).get();
+    public Block nextBlock(int... index) {
+        if (index.length == 0) {
+            return blocks.get(rnd.nextInt(blocks.size())).get();
+        } else {
+            return blocks.get(index[0]).get();
+        }
     }
 
 }
