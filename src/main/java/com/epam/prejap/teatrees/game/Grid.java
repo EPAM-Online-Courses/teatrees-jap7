@@ -3,6 +3,10 @@ package com.epam.prejap.teatrees.game;
 import java.util.Arrays;
 import java.util.Objects;
 
+/**
+ * @author dominik_kaminski
+ * @author przemyslaw_szewczyk
+ */
 record Grid(byte[][] grid, int rows, int cols) {
     Grid(int rows, int cols) {
         this(new byte[rows][cols], rows, cols);

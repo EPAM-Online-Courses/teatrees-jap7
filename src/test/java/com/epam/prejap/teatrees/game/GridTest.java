@@ -1,11 +1,7 @@
 package com.epam.prejap.teatrees.game;
 
-import com.epam.prejap.teatrees.block.BlockFeed;
-import com.epam.prejap.teatrees.game.Playfield;
-import com.epam.prejap.teatrees.game.Printer;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 
 import static org.testng.Assert.*;
 
@@ -18,7 +14,6 @@ public class GridTest {
         // when
         grid.removeCompleteLines();
         // then
-
         assertEquals(grid, expectedGrid);
     }
 
@@ -29,7 +24,6 @@ public class GridTest {
         // when
         grid.removeCompleteLines();
         // then
-
         assertEquals(grid, expectedGrid);
     }
 
