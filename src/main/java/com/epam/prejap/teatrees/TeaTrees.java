@@ -42,6 +42,7 @@ class TeaTrees {
         return new Score(score);
     }
 
+
     public static void main(String[] args) {
         int rows = 10;
         int cols = 20;

@@ -8,20 +8,21 @@ import java.util.List;
  * @author Herman Kulik
  */
 
-public class ScoreRecord {
+class ScoreRecord {
     private List<Record> records;
 
-    public List<Record> getRecords() {
+    List<Record> getRecords() {
         return new ArrayList<>(records);
     }
 
-    public void update(List<Record> newRecords) {
-        if (records != null){
+    void update(List<Record> newRecords) {
+        if (records != null) {
             records = newRecords;
         }
     }
 
-    public ScoreRecord(List<Record> records) {
-        this.records = records;
+    ScoreRecord(List<Record> records) {
+        if (records != null)
+            this.records = records;
     }
 }

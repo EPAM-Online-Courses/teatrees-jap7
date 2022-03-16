@@ -3,6 +3,7 @@ package com.epam.prejap.teatrees.records;
 import java.util.Scanner;
 
 /**
+ * @author Andrzej Sadlek
  * @author Herman Kulik
  */
 public class Result {

@@ -6,11 +6,11 @@ import java.util.Objects;
  * @author Andrzej Sadlek
  * @author Herman Kulik
  */
-public class Record implements Comparable<Record>{
+class Record implements Comparable<Record>{
     String name;
     int score;
 
-    public Record(String name, int score) {
+    Record(String name, int score) {
         this.name = name;
         this.score = score;
     }
@@ -38,11 +38,11 @@ public class Record implements Comparable<Record>{
         return this.getName().equals(record.getName());
     }
 
-    public String getName() {
+    String getName() {
         return name;
     }
 
-    public int getScore() {
+    int getScore() {
         return score;
     }
 }

@@ -11,22 +11,22 @@ import java.util.List;
  * @author Andrzej Sadlek
  * @author Herman Kulik
  */
-public class JSONParser {
+class JSONParser {
     private List<Record> recordsList;
     private ScoreRecord storeRecord;
-    File jsonFile;
+    private File jsonFile;
 
-    public JSONParser(File fileToParse) {
+    JSONParser(File fileToParse) {
         jsonFile = fileToParse;
         try {
             uploadDataFromJson();
         } catch (IOException e) {
-            System.err.println("cannot upload from score.json" + e.getMessage());
+            System.err.println("cannot upload from score.json" + e.getMessage()); //TODO logging
         }
     }
 
 
-    public List<Record> getRecordsList() {
+    List<Record> getRecordsList() {
         return new ArrayList<>(recordsList);
     }
 
@@ -51,7 +51,7 @@ public class JSONParser {
         updateJsonFile();
     }
 
-    void updateJsonFile() {
+    private void updateJsonFile() {
         clear();
         addNewRecordsToJSON(storeRecord);
     }
@@ -62,7 +62,7 @@ public class JSONParser {
             writer.write("");
             writer.flush();
         } catch (IOException e) {
-            System.err.println("Cannot clear score.json file");
+            System.err.println("Cannot clear score.json file"); // TODO logging
         }
     }
 
