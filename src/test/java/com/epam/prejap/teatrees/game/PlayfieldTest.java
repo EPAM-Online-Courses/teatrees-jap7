@@ -5,6 +5,7 @@ import com.epam.prejap.teatrees.game.Playfield;
 import com.epam.prejap.teatrees.game.Printer;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import static org.testng.Assert.*;
 
@@ -18,7 +19,12 @@ public class PlayfieldTest {
         // when
         playfield.removeCompleteLines();
         // then
-        assertEquals(grid, expectedGrid);
+
+        SoftAssert softAssert = new SoftAssert();
+        for (int i = 0; i < grid.length; i++) {
+            softAssert.assertEquals(grid[i], expectedGrid[i]);
+        }
+        softAssert.assertAll();
 
     }
 
@@ -30,8 +36,12 @@ public class PlayfieldTest {
         // when
         playfield.removeCompleteLines();
         // then
-        assertEquals(grid, expectedGrid);
 
+        SoftAssert softAssert = new SoftAssert();
+        for (int i = 0; i < grid.length; i++) {
+            softAssert.assertEquals(grid[i], expectedGrid[i]);
+        }
+        softAssert.assertAll();
     }
 
     @DataProvider
