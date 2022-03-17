@@ -32,23 +32,26 @@ public class ExecutableJarIT {
 
     public void testJARisCreated() throws IOException {
         long expected = 0;
-        long actual = Files.walk(Path.of(CLASSPATH),1).map(f -> f.getFileName().toString())
+        long actual = Files.walk(Path.of(CLASSPATH), 1).map(f -> f.getFileName().toString())
                 .filter(file -> file.endsWith(JAR_EXTENSION)).count();
-        assertNotEquals(actual,expected, "Expected to find more than 0 .jar files");
+        assertNotEquals(actual, expected, "Expected to find more than 0 .jar files");
     }
 
+    @Test(dependsOnMethods = "testJARisCreated")
     public void jarFileContainsManifestFile() throws IOException {
         List<Path> paths = Files.
                 walk(Path.of(CLASSPATH), 1)
                 .filter(file -> file.getFileName()
                         .toString().endsWith(JAR_EXTENSION))
                 .toList();
+
         for (Path path : paths) {
             JarFile jarFile = new JarFile(String.valueOf(path));
             assertNotNull(jarFile.getManifest(), "MANIFEST.MF does not exist");
         }
     }
 
+    @Test(dependsOnMethods = "testJARisCreated")
     public void manifestFileContainsMainClass() throws IOException {
         String expected = MAIN_CLASS_FQN;
         List<Path> paths = Files.
@@ -59,7 +62,7 @@ public class ExecutableJarIT {
         for (Path path : paths) {
             JarFile jarFile = new JarFile(String.valueOf(path));
             String actual = jarFile.getManifest().getMainAttributes().getValue("Main-Class");
-            assertEquals(actual,expected);
+            assertEquals(actual, expected);
         }
     }
 }
