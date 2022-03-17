@@ -38,7 +38,7 @@ class RecordHandler {
         return topResults;
     }
 
-    private boolean verifyNewRecord(Record newRecord) { // verifies new record, returns true if you beat a record
+    private boolean verifyNewRecord(Record newRecord) {
         if (recordsList.contains(newRecord)) {
             Record oldRecord = recordsList.get(recordsList.indexOf(newRecord));
             if (newRecord.getScore() > oldRecord.getScore()) {

@@ -14,7 +14,6 @@ import java.util.List;
 /**
  * @author Andrzej Sadlek
  * @author Herman Kulik
- * @author Andrzej Sadlek
  */
 public class JSONParserTest {
 

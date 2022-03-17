@@ -17,6 +17,7 @@ import java.util.Scanner;
  */
 public class ResultTest {
 
+
     @Test
     public void conclusionShouldWriteCorrectMessage() {
         PrintStream console = System.out;
@@ -31,8 +32,10 @@ public class ResultTest {
         SoftAssert softAssert = new SoftAssert();
 
         softAssert.assertTrue(bArray.toString().contains("har"));
-        softAssert.assertTrue(bArray.toString().contains("Congrats! It's your new record!"));
+        softAssert.assertTrue(bArray.toString().contains("Congrats! It's your new record har!"));
         softAssert.assertTrue(bArray.toString().contains("1000"));
+        softAssert.assertAll();
+
     }
 
     @Test(dataProvider = "provideName")
