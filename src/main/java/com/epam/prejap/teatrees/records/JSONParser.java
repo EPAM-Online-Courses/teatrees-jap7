@@ -18,11 +18,6 @@ class JSONParser {
 
     JSONParser(File fileToParse) {
         jsonFile = fileToParse;
-        try {
-            uploadDataFromJson();
-        } catch (IOException e) {
-            System.err.println("cannot upload from score.json" + e.getMessage()); //TODO logging
-        }
     }
 
 
@@ -30,20 +25,22 @@ class JSONParser {
         return new ArrayList<>(recordsList);
     }
 
-    private void uploadDataFromJson() throws IOException {
+    void uploadDataFromJson() throws IOException {
         String parsedJSONData = new String(Files.readAllBytes(jsonFile.toPath()));
         storeRecord = new Gson().fromJson(parsedJSONData, ScoreRecord.class);
         recordsList = storeRecord.getRecords();
     }
 
-    private void addNewRecordsToJSON(ScoreRecord scoreRecord) {
+    void addNewRecordsToJSON(ScoreRecord scoreRecord) {
+        if (scoreRecord == null) {
+            throw new IllegalArgumentException("Score is incorrect");
+        }
         try (FileWriter writer = new FileWriter(jsonFile);) {
             Gson gson = new Gson();
             gson.toJson(scoreRecord, writer);
         } catch (IOException e) {
             System.err.println("Cannot write new data to score.json");
         }
-
     }
 
     void updateStore(List<Record> record) {
@@ -56,8 +53,7 @@ class JSONParser {
         addNewRecordsToJSON(storeRecord);
     }
 
-    private void clear() {
-
+    void clear() {
         try (FileWriter writer = new FileWriter(jsonFile);) {
             writer.write("");
             writer.flush();

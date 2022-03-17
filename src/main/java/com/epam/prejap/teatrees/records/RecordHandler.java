@@ -1,22 +1,28 @@
 package com.epam.prejap.teatrees.records;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * @author Andrzej Sadlek
  * @author Herman Kulik
  */
 class RecordHandler {
-    private final File jsonFile = new File(Objects.requireNonNull(RecordHandler.class.getClassLoader().getResource("score.json")).getFile());
+    private final File jsonFile;;
     private final List<Record> recordsList;
     private final JSONParser parser;
 
-    RecordHandler() {
+    RecordHandler(File jsonFile) {
+        this.jsonFile = jsonFile;
         this.parser = new JSONParser(jsonFile);
+        try {
+            parser.uploadDataFromJson();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         this.recordsList = parser.getRecordsList();
     }
 

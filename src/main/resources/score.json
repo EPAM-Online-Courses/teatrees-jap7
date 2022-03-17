@@ -6,96 +6,15 @@
     },
     {
       "name": "pol",
-      "score": "1040"
+      "score": "1"
     },
     {
       "name": "ang",
-      "score": "100340"
+      "score": "1"
     },
     {
       "name": "chi",
-      "score": "10"
-    },
-    {
-      "name": "usa",
-      "score": "4000"
-    },
-    {
-      "name": "ada",
-      "score": "400"
-    },
-    {
-      "name": "rus",
-      "score": "1000"
-    },
-    {
-      "name": "cad",
-      "score": "1400"
-    },{
-      "name": "pol",
-      "score": "1040"
-    },
-    {
-      "name": "ang",
-      "score": "100340"
-    },
-    {
-      "name": "chi",
-      "score": "10"
-    },
-    {
-      "name": "usa",
-      "score": "4000"
-    },
-    {
-      "name": "ada",
-      "score": "400"
-    },
-    {
-      "name": "rus",
-      "score": "1000"
-    },
-    {
-      "name": "cad",
-      "score": "1400"
-    },{
-      "name": "pol",
-      "score": "1040"
-    },
-    {
-      "name": "ang",
-      "score": "100340"
-    },
-    {
-      "name": "chi",
-      "score": "10"
-    },
-    {
-      "name": "usa",
-      "score": "4000"
-    },
-    {
-      "name": "ada",
-      "score": "400"
-    },
-    {
-      "name": "rus",
-      "score": "1000"
-    },
-    {
-      "name": "cad",
-      "score": "1400"
-    },{
-      "name": "pol",
-      "score": "1040"
-    },
-    {
-      "name": "ang",
-      "score": "100340"
-    },
-    {
-      "name": "chi",
-      "score": "10"
+      "score": "0"
     },
     {
       "name": "usa",
@@ -103,19 +22,100 @@
     },
     {
       "name": "ada",
-      "score": "400"
+      "score": "0"
     },
     {
       "name": "rus",
-      "score": "1000"
+      "score": "0"
     },
     {
       "name": "cad",
-      "score": "1400"
+      "score": "0"
+    },{
+      "name": "pol",
+      "score": "2"
+    },
+    {
+      "name": "ang",
+      "score": "3"
+    },
+    {
+      "name": "chi",
+      "score": "10"
+    },
+    {
+      "name": "usa",
+      "score": "3"
+    },
+    {
+      "name": "ada",
+      "score": "2"
+    },
+    {
+      "name": "rus",
+      "score": "2"
+    },
+    {
+      "name": "cad",
+      "score": "2"
+    },{
+      "name": "pol",
+      "score": "1"
+    },
+    {
+      "name": "ang",
+      "score": "1"
+    },
+    {
+      "name": "chi",
+      "score": "1"
+    },
+    {
+      "name": "usa",
+      "score": "1"
+    },
+    {
+      "name": "ada",
+      "score": "3"
+    },
+    {
+      "name": "rus",
+      "score": "3"
+    },
+    {
+      "name": "cad",
+      "score": "3"
+    },{
+      "name": "pol",
+      "score": "3"
+    },
+    {
+      "name": "ang",
+      "score": "2"
+    },
+    {
+      "name": "chi",
+      "score": "1"
+    },
+    {
+      "name": "usa",
+      "score": "0"
+    },
+    {
+      "name": "ada",
+      "score": "1"
+    },
+    {
+      "name": "rus",
+      "score": "1"
+    },
+    {
+      "name": "cad",
+      "score": "1"
     },
     {
       "name": "BUG",
-      "score": "1400"
+      "score": "1"
     }
   ]
 }

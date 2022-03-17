@@ -1,5 +1,6 @@
 package com.epam.prejap.teatrees.records;
 
+import java.io.File;
 import java.util.Scanner;
 
 /**
@@ -8,9 +9,9 @@ import java.util.Scanner;
  */
 public class Result {
 
-    public void concludeTheGame(int score) {
+    public void concludeTheGame(int score, File jsonFile) {
         String nameOfThePlayer = getUserName(new Scanner(System.in));
-        boolean isNewBestRecord = new RecordHandler().handleNewRecord(new Record(nameOfThePlayer, score));
+        boolean isNewBestRecord = new RecordHandler(jsonFile).handleNewRecord(new Record(nameOfThePlayer, score));
         printFinalMessage(isNewBestRecord, score, nameOfThePlayer);
 
     }

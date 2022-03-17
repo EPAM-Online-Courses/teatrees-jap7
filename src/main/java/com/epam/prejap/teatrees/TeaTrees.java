@@ -9,6 +9,9 @@ import com.epam.prejap.teatrees.player.Player;
 import com.epam.prejap.teatrees.player.RandomPlayer;
 import com.epam.prejap.teatrees.records.Result;
 
+import java.io.File;
+import java.util.Objects;
+
 class TeaTrees {
 
     private final Playfield playfield;
@@ -56,7 +59,8 @@ class TeaTrees {
         var score = game.play();
 
         Result result = new Result();
-        result.concludeTheGame(score.points());
+        File json = new File(Objects.requireNonNull(TeaTrees.class.getClassLoader().getResource("score.json")).getFile());
+        result.concludeTheGame(score.points(), json);
 
     }
 
