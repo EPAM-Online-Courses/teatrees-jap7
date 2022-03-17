@@ -1,11 +1,8 @@
 package com.epam.prejap.teatrees.records;
 
-import com.google.gson.Gson;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
@@ -16,6 +13,7 @@ import java.util.List;
 
 /**
  * @author Herman Kulik
+ * @author Andrzej Sadlek
  */
 public class JSONParserTest {
 

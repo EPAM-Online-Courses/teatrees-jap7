@@ -52,8 +52,8 @@ class RecordHandler {
         return false;
     }
 
-    private void updateStore() {
-        parser.updateStore(recordsList);
+    private void updateScore() {
+        parser.updateScore(recordsList);
     }
 
     private void printHighScore(List<Record> topResults) {
@@ -62,7 +62,7 @@ class RecordHandler {
 
     boolean handleNewRecord(Record record) {
         boolean isNewRecord = verifyNewRecord(record);
-        updateStore();
+        updateScore();
         printHighScore(getHighScore());
         return isNewRecord;
     }

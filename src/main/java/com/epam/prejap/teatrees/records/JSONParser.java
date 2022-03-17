@@ -13,7 +13,7 @@ import java.util.List;
  */
 class JSONParser {
     private List<Record> recordsList;
-    private ScoreRecord storeRecord;
+    private ScoreRecord scoreRecord;
     private File jsonFile;
 
     JSONParser(File fileToParse) {
@@ -27,8 +27,8 @@ class JSONParser {
 
     void uploadDataFromJson() throws IOException {
         String parsedJSONData = new String(Files.readAllBytes(jsonFile.toPath()));
-        storeRecord = new Gson().fromJson(parsedJSONData, ScoreRecord.class);
-        recordsList = storeRecord.getRecords();
+        scoreRecord = new Gson().fromJson(parsedJSONData, ScoreRecord.class);
+        recordsList = scoreRecord.getRecords();
     }
 
     void addNewRecordsToJSON(ScoreRecord scoreRecord) {
@@ -43,14 +43,14 @@ class JSONParser {
         }
     }
 
-    void updateStore(List<Record> record) {
-        storeRecord.update(record);
+    void updateScore(List<Record> record) {
+        scoreRecord.update(record);
         updateJsonFile();
     }
 
     private void updateJsonFile() {
         clear();
-        addNewRecordsToJSON(storeRecord);
+        addNewRecordsToJSON(scoreRecord);
     }
 
     void clear() {
