@@ -1,6 +1,5 @@
 package com.epam.prejap.teatrees.records;
 
-import com.google.gson.stream.JsonToken;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
