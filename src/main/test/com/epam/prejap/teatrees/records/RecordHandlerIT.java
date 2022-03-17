@@ -103,4 +103,37 @@ public class RecordHandlerIT {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void numberOfTopResultsIsLessThanTwentyFiveWithLessThanTwentyFiveRecords(){
+        try {
+            Path tmp = Files.createTempFile("tempusix", ".json");
+            PrintStream ps = new PrintStream(tmp.toString());
+            ps.println("{'records': [{'name': 'one', 'score': 1},{'name': 'two', 'score': 1},{'name': 'three', 'score': 1},{'name': 'four', 'score': 1}]}");
+            RecordHandler recordHandler = new RecordHandler(tmp.toFile());
+            Assert.assertTrue(recordHandler.getHighScore().size()<=25);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void numberOfTopResultsIsEqualTwentyFiveWhenMoreThanTwentyFiveRecords(){
+        try {
+            Path tmp = Files.createTempFile("tempusix2", ".json");
+            PrintStream ps = new PrintStream(tmp.toString());
+            String recordList = "{'records': [";
+            for(int i = 0; i<28; i++){
+                recordList += ("{'name': 'one', 'score': 1},");
+            }
+            recordList = recordList.substring(0, recordList.length()-1);
+            recordList += "]}";
+            ps.println(recordList);
+
+            RecordHandler recordHandler = new RecordHandler(tmp.toFile());
+            Assert.assertTrue(recordHandler.getHighScore().size()==25);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

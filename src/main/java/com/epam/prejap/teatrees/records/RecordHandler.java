@@ -26,7 +26,7 @@ class RecordHandler {
         this.recordsList = parser.getRecordsList();
     }
 
-    private List<Record> getHighScore() {
+     List<Record> getHighScore() {
         Collections.sort(recordsList);
         List<Record> topResults;
 
