@@ -28,4 +28,19 @@ public class RecordHandlerTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void recordShouldNotBeVerified() {
+        try{
+            Record newRecord = new Record("reh", 10);
+            Path tmp = Files.createTempFile("temp2", ".json");
+            PrintStream ps = new PrintStream(tmp.toString());
+            ps.println("{'records': [{'name': 'reh', 'score': 12}]}");
+
+            RecordHandler recordHandler = new RecordHandler(tmp.toFile());
+            Assert.assertFalse(recordHandler.handleNewRecord(newRecord));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
