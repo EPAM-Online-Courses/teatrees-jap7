@@ -7,6 +7,7 @@ import java.io.PrintStream;
 import static org.testng.Assert.*;
 
 /**
+ * @author Andrzej Sadlek
  * @author Herman Kulik
  */
 public class RecordTest {

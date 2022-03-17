@@ -7,8 +7,8 @@ import java.util.Objects;
  * @author Herman Kulik
  */
 class Record implements Comparable<Record>{
-    String name;
-    int score;
+    private final String name;
+    private final int score;
 
     Record(String name, int score) {
         this.name = name;

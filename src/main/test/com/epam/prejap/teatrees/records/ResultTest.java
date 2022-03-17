@@ -12,6 +12,7 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
+ * @author Andrzej Sadlek
  * @author Herman Kulik
  */
 public class ResultTest {

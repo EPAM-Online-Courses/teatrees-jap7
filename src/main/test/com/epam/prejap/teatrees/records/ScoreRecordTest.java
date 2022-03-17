@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * @author Andrzej Sadlek
  * @author Herman Kulik
  */
 public class ScoreRecordTest {

@@ -1,11 +1,8 @@
 package com.epam.prejap.teatrees.records;
 
-import com.google.gson.Gson;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
@@ -15,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * @author Andrzej Sadlek
  * @author Herman Kulik
  */
 public class JSONParserTest {
@@ -64,7 +62,7 @@ public class JSONParserTest {
     }
 
     @Test
-    public void newRecordShouldBeAddedToJSON(){
+    public void newRecordShouldBeAddedToJSON() {
         try {
             Record record = new Record("her", 3);
             List<Record> records = new ArrayList<>();
@@ -75,20 +73,20 @@ public class JSONParserTest {
             jsonParser.addNewRecordsToJSON(scoreRecord);
             String content = Files.readString(tmp, StandardCharsets.US_ASCII);
             Assert.assertEquals(content, "{\"records\":[{\"name\":\"her\",\"score\":3}]}");
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
-    public void nullShouldNotBeAddedToJSONAndThrowsException(){
+    public void nullShouldNotBeAddedToJSONAndThrowsException() {
         try {
             Path tmp = Files.createTempFile("temp3", ".json");
             JSONParser jsonParser = new JSONParser(tmp.toFile());
             jsonParser.addNewRecordsToJSON(null);
             String content = Files.readString(tmp, StandardCharsets.US_ASCII);
             Assert.assertEquals(content, "{\"records\":[{\"name\":\"her\",\"score\":3}]}");
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
