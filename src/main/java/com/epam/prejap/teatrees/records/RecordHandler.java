@@ -12,7 +12,6 @@ import java.util.List;
  */
 class RecordHandler {
     private final File jsonFile;
-    ;
     private final List<Record> recordsList;
     private final JSONParser parser;
 
