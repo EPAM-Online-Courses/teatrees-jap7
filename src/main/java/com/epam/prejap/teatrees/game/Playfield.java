@@ -18,12 +18,6 @@ public class Playfield {
         grid = new Grid(rows, cols);
     }
 
-    Playfield(byte[][] grid, BlockFeed feed, Printer printer) {
-        this.feed = feed;
-        this.printer = printer;
-        this.grid = new Grid(grid);
-    }
-
     public void nextBlock() {
         block = feed.nextBlock();
         row = 0;
