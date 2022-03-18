@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 /**
+ * Provides Playfield an api for working with 2D array.
  * @author dominik_kaminski
  * @author przemyslaw_szewczyk
  */
