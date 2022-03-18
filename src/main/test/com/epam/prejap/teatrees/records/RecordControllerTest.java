@@ -11,7 +11,7 @@ import java.util.List;
  * @author Andrzej Sadlek
  * @author Herman Kulik
  */
-public class ScoreRecordTest {
+public class RecordControllerTest {
     List<Record> records = new ArrayList<>();
 
     @BeforeMethod
@@ -23,25 +23,32 @@ public class ScoreRecordTest {
 
     @Test
     public void recordsShouldBeEqual() {
+        //given
         RecordCollector scoreRecord = new RecordCollector(records);
+        //when
+        //then
         Assert.assertEquals(records, scoreRecord.getRecords());
     }
 
     @Test
     public void recordsShouldNotBeUpdated() {
+        //given
         RecordCollector scoreRecord = new RecordCollector(records);
+        //when
         scoreRecord.update(null);
+        //then
         Assert.assertEquals(scoreRecord.getRecords(), records);
     }
 
     @Test
     public void recordsShouldBeUpdated() {
+        //given
         RecordCollector scoreRecord = new RecordCollector(records);
-
         List<Record> newRecords = new ArrayList<>(records);
         newRecords.add(new Record("four", 4));
-
+        //when
         scoreRecord.update(newRecords);
+        //then
         Assert.assertNotEquals(scoreRecord.getRecords(), records);
     }
 

@@ -14,6 +14,4 @@ public class GameConcluder {
         boolean isNewBestRecord = new RecordHandler(jsonFile).handleNewRecord(new Record(nameOfThePlayer, score));
         messagePrinter.printFinalMessage(isNewBestRecord, score, nameOfThePlayer);
     }
-
-
 }
