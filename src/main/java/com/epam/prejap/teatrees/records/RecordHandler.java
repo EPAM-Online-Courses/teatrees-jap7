@@ -12,7 +12,6 @@ import java.util.List;
  */
 class RecordHandler {
     private final File jsonFile;
-    ;
     private final List<Record> recordsList;
     private final JSONParser parser;
 
@@ -22,7 +21,7 @@ class RecordHandler {
         try {
             parser.uploadDataFromJson();
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // TODO logger
         }
         this.recordsList = parser.getRecordsList();
     }
