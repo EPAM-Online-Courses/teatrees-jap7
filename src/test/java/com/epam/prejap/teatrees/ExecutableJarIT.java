@@ -1,5 +1,7 @@
 package com.epam.prejap.teatrees;
 
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.io.*;
@@ -19,31 +21,28 @@ public class ExecutableJarIT {
     private static String CLASSPATH;
     private static final String JAR_EXTENSION = "jar";
 
-    static {
+
+    @BeforeClass
+    public void init() {
         CodeSource codeSource = TeaTrees.class.getProtectionDomain().getCodeSource();
         File jarFile;
         try {
             jarFile = new File(codeSource.getLocation().toURI().getPath());
             CLASSPATH = jarFile.getParentFile().getPath();
         } catch (URISyntaxException e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
     }
 
     public void testJARisCreated() throws IOException {
         long expected = 0;
-        long actual = Files.walk(Path.of(CLASSPATH), 1).map(f -> f.getFileName().toString())
-                .filter(file -> file.endsWith(JAR_EXTENSION)).count();
+        long actual = findPathsWithExtensions(CLASSPATH,JAR_EXTENSION).size();
         assertNotEquals(actual, expected, "Expected to find more than 0 .jar files");
     }
 
     @Test(dependsOnMethods = "testJARisCreated")
     public void jarFileContainsManifestFile() throws IOException {
-        List<Path> paths = Files.
-                walk(Path.of(CLASSPATH), 1)
-                .filter(file -> file.getFileName()
-                        .toString().endsWith(JAR_EXTENSION))
-                .toList();
+        List<Path> paths = findPathsWithExtensions(CLASSPATH,JAR_EXTENSION);
 
         for (Path path : paths) {
             JarFile jarFile = new JarFile(String.valueOf(path));
@@ -54,15 +53,21 @@ public class ExecutableJarIT {
     @Test(dependsOnMethods = "testJARisCreated")
     public void manifestFileContainsMainClass() throws IOException {
         String expected = MAIN_CLASS_FQN;
-        List<Path> paths = Files.
-                walk(Path.of(CLASSPATH), 1)
-                .filter(file -> file.getFileName()
-                        .toString().endsWith(JAR_EXTENSION))
-                .toList();
+        List<Path> paths = findPathsWithExtensions(CLASSPATH,JAR_EXTENSION);
+
         for (Path path : paths) {
             JarFile jarFile = new JarFile(String.valueOf(path));
             String actual = jarFile.getManifest().getMainAttributes().getValue("Main-Class");
             assertEquals(actual, expected);
         }
+    }
+
+    private List<Path> findPathsWithExtensions(String path, String extension) throws IOException {
+        List<Path> paths = Files.
+                walk(Path.of(path), 1)
+                .filter(file -> file.getFileName()
+                        .toString().endsWith(extension))
+                .toList();
+        return paths;
     }
 }
