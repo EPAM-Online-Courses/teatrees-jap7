@@ -12,7 +12,7 @@ final class IBlock extends Block {
             {0, 1},
     };
 
-    public IBlock() {
+    IBlock() {
         super(IMAGE);
     }
 
