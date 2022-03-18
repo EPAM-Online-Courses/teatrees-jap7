@@ -27,7 +27,7 @@ public class MessagePrinterTest {
         System.setOut(printStream);
         MessagePrinter messagePrinter = new MessagePrinter();
         //when
-        messagePrinter.printFinalMessage( true, 1000, "har");
+        messagePrinter.printFinalMessage(true, 1000, "har");
         System.setOut(console);
         //then
         SoftAssert softAssert = new SoftAssert();
@@ -69,6 +69,5 @@ public class MessagePrinterTest {
                 {"   ", "   "},
         };
     }
-
 
 }
