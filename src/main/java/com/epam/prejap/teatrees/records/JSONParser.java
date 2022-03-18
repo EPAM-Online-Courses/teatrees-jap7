@@ -13,7 +13,7 @@ import java.util.List;
  */
 class JSONParser {
     private List<Record> recordsList;
-    private ScoreRecord scoreRecord;
+    private RecordCollector recordCollector;
     private File jsonFile;
 
     JSONParser(File fileToParse) {
@@ -27,30 +27,30 @@ class JSONParser {
 
     void uploadDataFromJson() throws IOException {
         String parsedJSONData = new String(Files.readAllBytes(jsonFile.toPath()));
-        scoreRecord = new Gson().fromJson(parsedJSONData, ScoreRecord.class);
-        recordsList = scoreRecord.getRecords();
+        recordCollector = new Gson().fromJson(parsedJSONData, RecordCollector.class);
+        recordsList = recordCollector.getRecords();
     }
 
-    void addNewRecordsToJSON(ScoreRecord scoreRecord) {
-        if (scoreRecord == null) {
+    void addNewRecordsToJSON(RecordCollector recordCollector) {
+        if (recordCollector == null) {
             throw new IllegalArgumentException("Score is incorrect");
         }
         try (FileWriter writer = new FileWriter(jsonFile);) {
             Gson gson = new Gson();
-            gson.toJson(scoreRecord, writer);
+            gson.toJson(recordCollector, writer);
         } catch (IOException e) {
             System.err.println("Cannot write new data to score.json");
         }
     }
 
     void updateScore(List<Record> record) {
-        scoreRecord.update(record);
+        recordCollector.update(record);
         updateJsonFile();
     }
 
     private void updateJsonFile() {
         clear();
-        addNewRecordsToJSON(scoreRecord);
+        addNewRecordsToJSON(recordCollector);
     }
 
     void clear() {

@@ -1,21 +1,8 @@
 package com.epam.prejap.teatrees.records;
 
-import java.io.File;
 import java.util.Scanner;
 
-/**
- * @author Andrzej Sadlek
- * @author Herman Kulik
- */
-public class Result {
-
-    public void concludeTheGame(int score, File jsonFile) {
-        String nameOfThePlayer = getUserName(new Scanner(System.in));
-        boolean isNewBestRecord = new RecordHandler(jsonFile).handleNewRecord(new Record(nameOfThePlayer, score));
-        printFinalMessage(isNewBestRecord, score, nameOfThePlayer);
-
-    }
-
+public class MessagePrinter {
     void printFinalMessage(boolean isNewBestRecord, int score, String nameOfThePlayer) {
         System.out.println("\nScore: " + score);
         if (isNewBestRecord) {
@@ -23,7 +10,7 @@ public class Result {
         }
     }
 
-    String getUserName(Scanner scanner) {
+    String askForUserName(Scanner scanner) {
         System.out.println("Type your name (only 3 letters allowed): ");
         String nameOfThePlayer = scanner.nextLine();
         while (nameOfThePlayer.length() != 3) {

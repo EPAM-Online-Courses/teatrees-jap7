@@ -8,7 +8,7 @@ import java.util.List;
  * @author Herman Kulik
  */
 
-class ScoreRecord {
+class RecordCollector {
     private List<Record> records;
 
     List<Record> getRecords() {
@@ -21,7 +21,7 @@ class ScoreRecord {
         }
     }
 
-    ScoreRecord(List<Record> records) {
+    RecordCollector(List<Record> records) {
         if (records != null)
             this.records = records;
     }

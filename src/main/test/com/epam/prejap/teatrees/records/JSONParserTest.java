@@ -20,13 +20,14 @@ public class JSONParserTest {
     @Test
     public void fileShouldBeCleared() {
         try {
+            //given
             Path tmp = Files.createTempFile("temp", ".json");
             PrintStream ps = new PrintStream(tmp.toString());
             ps.println(1234);
-
             JSONParser parser = new JSONParser(tmp.toFile());
+            //when
             parser.clear();
-
+            //then
             Assert.assertEquals(Files.size(tmp), 0);
         } catch (IOException e) {
             e.printStackTrace();
@@ -36,12 +37,14 @@ public class JSONParserTest {
     @Test
     public void dataShouldBeUploadedFromJsonFile() {
         try {
+            //given
             Path tmp = Files.createTempFile("temp2", ".json");
             PrintStream ps = new PrintStream(tmp.toString());
             ps.println("{'records': [{'name': 'her', 'score': 3}]}");
             JSONParser jsonParser = new JSONParser(tmp.toFile());
+            //when
             jsonParser.uploadDataFromJson();
-            System.out.println(jsonParser.getRecordsList().get(0));
+            //then
             Assert.assertTrue(jsonParser.getRecordsList().get(0).getName().equals("her") && jsonParser.getRecordsList().get(0).getScore() == 3);
         } catch (IOException e) {
             e.printStackTrace();
@@ -51,11 +54,14 @@ public class JSONParserTest {
     @Test(expectedExceptions = com.google.gson.JsonSyntaxException.class)
     public void dataShouldNotBeUploadedFromJsonFile() {
         try {
+            //given
             Path tmp = Files.createTempFile("temp2", ".json");
             PrintStream ps = new PrintStream(tmp.toString());
             ps.println("Sample Text");
             JSONParser jsonParser = new JSONParser(tmp.toFile());
+            //when
             jsonParser.uploadDataFromJson();
+            //then
         } catch (IOException | IllegalStateException e) {
             e.printStackTrace();
         }
@@ -64,14 +70,17 @@ public class JSONParserTest {
     @Test
     public void newRecordShouldBeAddedToJSON() {
         try {
+            //given
             Record record = new Record("her", 3);
             List<Record> records = new ArrayList<>();
             records.add(record);
-            ScoreRecord scoreRecord = new ScoreRecord(records);
+            RecordCollector scoreRecord = new RecordCollector(records);
             Path tmp = Files.createTempFile("temp3", ".json");
             JSONParser jsonParser = new JSONParser(tmp.toFile());
+            //when
             jsonParser.addNewRecordsToJSON(scoreRecord);
             String content = Files.readString(tmp, StandardCharsets.US_ASCII);
+            //then
             Assert.assertEquals(content, "{\"records\":[{\"name\":\"her\",\"score\":3}]}");
         } catch (IOException e) {
             e.printStackTrace();
@@ -81,11 +90,13 @@ public class JSONParserTest {
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void nullShouldNotBeAddedToJSONAndThrowsException() {
         try {
+            //given
             Path tmp = Files.createTempFile("temp3", ".json");
             JSONParser jsonParser = new JSONParser(tmp.toFile());
+            //when
             jsonParser.addNewRecordsToJSON(null);
             String content = Files.readString(tmp, StandardCharsets.US_ASCII);
-            Assert.assertEquals(content, "{\"records\":[{\"name\":\"her\",\"score\":3}]}");
+            //then
         } catch (IOException e) {
             e.printStackTrace();
         }

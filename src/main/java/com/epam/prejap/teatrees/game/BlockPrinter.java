@@ -2,11 +2,11 @@ package com.epam.prejap.teatrees.game;
 
 import java.io.PrintStream;
 
-public class Printer {
+public class BlockPrinter {
 
     final PrintStream out;
 
-    public Printer(PrintStream out) {
+    public BlockPrinter(PrintStream out) {
         this.out = out;
     }
 

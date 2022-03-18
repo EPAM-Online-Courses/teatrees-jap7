@@ -23,20 +23,20 @@ public class ScoreRecordTest {
 
     @Test
     public void recordsShouldBeEqual() {
-        ScoreRecord scoreRecord = new ScoreRecord(records);
+        RecordCollector scoreRecord = new RecordCollector(records);
         Assert.assertEquals(records, scoreRecord.getRecords());
     }
 
     @Test
     public void recordsShouldNotBeUpdated() {
-        ScoreRecord scoreRecord = new ScoreRecord(records);
+        RecordCollector scoreRecord = new RecordCollector(records);
         scoreRecord.update(null);
         Assert.assertEquals(scoreRecord.getRecords(), records);
     }
 
     @Test
     public void recordsShouldBeUpdated() {
-        ScoreRecord scoreRecord = new ScoreRecord(records);
+        RecordCollector scoreRecord = new RecordCollector(records);
 
         List<Record> newRecords = new ArrayList<>(records);
         newRecords.add(new Record("four", 4));
