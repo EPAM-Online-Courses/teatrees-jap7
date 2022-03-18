@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Responsible for parsing .json files into JSONObjects, used to operate on users' scores.
+ * Uploads data from .json into a list, updates the list if required, stores updated list
+ * into .json file, located in resources directory
  * @author Andrzej Sadlek
  * @author Herman Kulik
  */

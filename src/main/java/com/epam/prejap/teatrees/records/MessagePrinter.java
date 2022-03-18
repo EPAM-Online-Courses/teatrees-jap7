@@ -2,6 +2,9 @@ package com.epam.prejap.teatrees.records;
 
 import java.util.Scanner;
 
+/**
+ * Responsible for user-console-user interaction by the end of the Game: takes user's name, prints score to console
+ */
 public class MessagePrinter {
     void printFinalMessage(boolean isNewBestRecord, int score, String nameOfThePlayer) {
         System.out.println("\nScore: " + score);
