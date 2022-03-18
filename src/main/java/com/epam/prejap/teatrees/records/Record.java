@@ -6,7 +6,7 @@ import java.util.Objects;
  * @author Andrzej Sadlek
  * @author Herman Kulik
  */
-class Record implements Comparable<Record>{
+class Record implements Comparable<Record> {
     private final String name;
     private final int score;
 
@@ -32,8 +32,8 @@ class Record implements Comparable<Record>{
 
     @Override
     public boolean equals(Object obj) {
-        if(obj == this) return  true;
-        if(obj == null || !obj.getClass().equals(this.getClass())) return false;
+        if (obj == this) return true;
+        if (obj == null || !obj.getClass().equals(this.getClass())) return false;
         Record record = (Record) obj;
         return this.getName().equals(record.getName());
     }

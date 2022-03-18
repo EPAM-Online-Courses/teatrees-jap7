@@ -11,7 +11,8 @@ import java.util.List;
  * @author Herman Kulik
  */
 class RecordHandler {
-    private final File jsonFile;;
+    private final File jsonFile;
+    ;
     private final List<Record> recordsList;
     private final JSONParser parser;
 
@@ -26,7 +27,7 @@ class RecordHandler {
         this.recordsList = parser.getRecordsList();
     }
 
-     List<Record> getHighScore() {
+    List<Record> getHighScore() {
         Collections.sort(recordsList);
         List<Record> topResults;
 

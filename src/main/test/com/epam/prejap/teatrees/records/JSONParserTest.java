@@ -103,6 +103,4 @@ public class JSONParserTest {
     }
 
     //TODO newRecordShouldNotBeAddedToJSON()
-
-
 }

@@ -18,14 +18,14 @@ public class RecordHandlerIT {
 
     @Test
     public void recordShouldBeVerifiedAsNewRecord() {
-        try{
-        Record newRecord = new Record("reh", 16);
-        Path tmp = Files.createTempFile("temp2", ".json");
-        PrintStream ps = new PrintStream(tmp.toString());
-        ps.println("{'records': [{'name': 'reh', 'score': 12}]}");
+        try {
+            Record newRecord = new Record("reh", 16);
+            Path tmp = Files.createTempFile("temp2", ".json");
+            PrintStream ps = new PrintStream(tmp.toString());
+            ps.println("{'records': [{'name': 'reh', 'score': 12}]}");
 
-        RecordHandler recordHandler = new RecordHandler(tmp.toFile());
-        Assert.assertTrue(recordHandler.handleNewRecord(newRecord));
+            RecordHandler recordHandler = new RecordHandler(tmp.toFile());
+            Assert.assertTrue(recordHandler.handleNewRecord(newRecord));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -33,7 +33,7 @@ public class RecordHandlerIT {
 
     @Test
     public void recordShouldNotBeVerifiedAsNewRecord() {
-        try{
+        try {
             Record newRecord = new Record("reh", 10);
             Path tmp = Files.createTempFile("temp2", ".json");
             PrintStream ps = new PrintStream(tmp.toString());
@@ -49,7 +49,7 @@ public class RecordHandlerIT {
 
     @Test
     public void newRecordShouldBeWrittenToFile() {
-        try{
+        try {
             Record newRecord = new Record("one", 1000);
 
             Path tmp = Files.createTempFile("temp2", ".json");
@@ -68,7 +68,7 @@ public class RecordHandlerIT {
 
     @Test
     public void LackOfNewRecordShouldNotBeWrittenToFile() {
-        try{
+        try {
             Record notANewRecord = new Record("one", 1);
 
             Path tmp = Files.createTempFile("temp2", ".json");
@@ -87,7 +87,7 @@ public class RecordHandlerIT {
 
     @Test
     public void newRecordShouldBeAddedIfMissing() {
-        try{
+        try {
             Record freshScore = new Record("one", 1);
 
             Path tmp = Files.createTempFile("tempus", ".json");
@@ -105,33 +105,33 @@ public class RecordHandlerIT {
     }
 
     @Test
-    public void numberOfTopResultsIsLessThanTwentyFiveWithLessThanTwentyFiveRecords(){
+    public void numberOfTopResultsIsLessThanTwentyFiveWithLessThanTwentyFiveRecords() {
         try {
             Path tmp = Files.createTempFile("tempusix", ".json");
             PrintStream ps = new PrintStream(tmp.toString());
             ps.println("{'records': [{'name': 'one', 'score': 1},{'name': 'two', 'score': 1},{'name': 'three', 'score': 1},{'name': 'four', 'score': 1}]}");
             RecordHandler recordHandler = new RecordHandler(tmp.toFile());
-            Assert.assertTrue(recordHandler.getHighScore().size()<=25);
+            Assert.assertTrue(recordHandler.getHighScore().size() <= 25);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     @Test
-    public void numberOfTopResultsIsEqualTwentyFiveWhenMoreThanTwentyFiveRecords(){
+    public void numberOfTopResultsIsEqualTwentyFiveWhenMoreThanTwentyFiveRecords() {
         try {
             Path tmp = Files.createTempFile("tempusix2", ".json");
             PrintStream ps = new PrintStream(tmp.toString());
             String recordList = "{'records': [";
-            for(int i = 0; i<28; i++){
+            for (int i = 0; i < 28; i++) {
                 recordList += ("{'name': 'one', 'score': 1},");
             }
-            recordList = recordList.substring(0, recordList.length()-1);
+            recordList = recordList.substring(0, recordList.length() - 1);
             recordList += "]}";
             ps.println(recordList);
 
             RecordHandler recordHandler = new RecordHandler(tmp.toFile());
-            Assert.assertTrue(recordHandler.getHighScore().size()==25);
+            Assert.assertTrue(recordHandler.getHighScore().size() == 25);
         } catch (IOException e) {
             e.printStackTrace();
         }
