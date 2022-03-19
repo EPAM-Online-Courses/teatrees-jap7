@@ -1,7 +1,6 @@
 package com.epam.prejap.teatrees;
 
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.io.*;
@@ -20,7 +19,6 @@ public class ExecutableJarIT {
     private static final String MAIN_CLASS_FQN = TeaTrees.class.getName();
     private static String CLASSPATH;
     private static final String JAR_EXTENSION = "jar";
-
 
     @BeforeClass
     public void init() {
