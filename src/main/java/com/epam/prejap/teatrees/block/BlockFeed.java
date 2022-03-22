@@ -18,4 +18,8 @@ public class BlockFeed {
         return blocks.get(rnd.nextInt(blocks.size())).get();
     }
 
+    public Block nextBlock(int i) {
+        return blocks.get(i).get();
+    }
+
 }
