@@ -54,7 +54,7 @@ public class Printer {
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
-            System.err.println(e.getMessage());
+            Thread.currentThread().interrupt();
         }
     }
 }

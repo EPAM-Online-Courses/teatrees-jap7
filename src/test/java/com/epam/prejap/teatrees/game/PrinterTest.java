@@ -1,7 +1,6 @@
 package com.epam.prejap.teatrees.game;
 
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -9,27 +8,19 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 public class PrinterTest {
-    private static PrintStream originalPrintStream;
     private static PrintStream capturedPrintStream;
     private static ByteArrayOutputStream output;
 
     @BeforeMethod
     private void setupStreams() {
-        originalPrintStream = System.out;
         output = new ByteArrayOutputStream();
         capturedPrintStream = new PrintStream(output);
-        System.setOut(capturedPrintStream);
-    }
-
-    @AfterMethod
-    private void cleanUpStreams() {
-        System.setOut(originalPrintStream);
     }
 
     @Test
     public void shouldPrintWelcomeMsg() {
         // given
-        Printer printer = new Printer(new PrintStream(capturedPrintStream));
+        Printer printer = new Printer(capturedPrintStream);
         String expected = """
                 _|          _|              _|                                                   \s
                 _|          _|     _|_|     _|     _|_|_|     _|_|     _|_|_|  _|_|       _|_|   \s
