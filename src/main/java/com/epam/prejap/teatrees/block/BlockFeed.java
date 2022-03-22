@@ -6,19 +6,16 @@ import java.util.function.Supplier;
 
 public class BlockFeed {
 
-    private final Random rnd = new Random();
+    private final Random rnd;
     private final List<Supplier<Block>> blocks = List.of(
          OBlock::new, UBlock::new
     );
 
-    public BlockFeed() {
+    public BlockFeed(Random random) {
+        this.rnd = random;
     }
 
     public Block nextBlock() {
         return blocks.get(rnd.nextInt(blocks.size())).get();
-    }
-
-    public Block nextBlock(int index) {
-        return blocks.get(index).get();
     }
 }

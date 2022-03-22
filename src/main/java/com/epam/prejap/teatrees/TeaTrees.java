@@ -8,6 +8,8 @@ import com.epam.prejap.teatrees.game.Waiter;
 import com.epam.prejap.teatrees.player.Player;
 import com.epam.prejap.teatrees.player.RandomPlayer;
 
+import java.util.Random;
+
 class TeaTrees {
 
     private final Playfield playfield;
@@ -46,7 +48,7 @@ class TeaTrees {
         int cols = 20;
         int delay = 500;
 
-        var feed = new BlockFeed();
+        var feed = new BlockFeed(new Random());
         var printer = new Printer(System.out);
         var playfield = new Playfield(rows, cols, feed, printer);
         var game = new TeaTrees(playfield, new Waiter(delay), new RandomPlayer());
