@@ -3,11 +3,10 @@ package com.epam.prejap.teatrees;
 import com.epam.prejap.teatrees.block.BlockFeed;
 import com.epam.prejap.teatrees.game.Move;
 import com.epam.prejap.teatrees.game.Playfield;
-import com.epam.prejap.teatrees.game.BlockPrinter;
+import com.epam.prejap.teatrees.game.Printer;
 import com.epam.prejap.teatrees.game.Waiter;
 import com.epam.prejap.teatrees.player.Player;
 import com.epam.prejap.teatrees.player.RandomPlayer;
-import com.epam.prejap.teatrees.records.MessagePrinter;
 import com.epam.prejap.teatrees.records.GameConcluder;
 
 import java.io.File;
@@ -53,16 +52,15 @@ class TeaTrees {
         int delay = 500;
 
         var feed = new BlockFeed();
-        var printer = new BlockPrinter(System.out);
+        var printer = new Printer(System.out);
         var playfield = new Playfield(rows, cols, feed, printer);
         var game = new TeaTrees(playfield, new Waiter(delay), new RandomPlayer());
 
         var score = game.play();
 
         GameConcluder gameConcluder = new GameConcluder();
-        MessagePrinter messagePrinter = new MessagePrinter();
         File json = new File(Objects.requireNonNull(TeaTrees.class.getClassLoader().getResource("score.json")).getFile());
-        gameConcluder.concludeTheGame(score.points(), json, messagePrinter);
+        gameConcluder.concludeTheGame(score.points(), json, printer);
 
     }
 

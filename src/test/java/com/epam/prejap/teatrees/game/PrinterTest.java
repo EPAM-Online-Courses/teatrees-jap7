@@ -1,7 +1,8 @@
-package com.epam.prejap.teatrees.records;
+package com.epam.prejap.teatrees.game;
 
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import java.io.ByteArrayInputStream;
@@ -11,12 +12,9 @@ import java.nio.charset.StandardCharsets;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-/**
- * @author Andrzej Sadlek
- * @author Herman Kulik
- */
-public class MessagePrinterTest {
 
+
+public class PrinterTest {
 
     @Test
     public void conclusionShouldWriteCorrectMessage() {
@@ -25,9 +23,9 @@ public class MessagePrinterTest {
         ByteArrayOutputStream bArray = new ByteArrayOutputStream();
         PrintStream printStream = new PrintStream(bArray);
         System.setOut(printStream);
-        MessagePrinter messagePrinter = new MessagePrinter();
+        Printer printer = new Printer(System.out);
         //when
-        messagePrinter.printFinalMessage(true, 1000, "har");
+        printer.printFinalMessage(true, 1000, "har");
         System.setOut(console);
         //then
         SoftAssert softAssert = new SoftAssert();
@@ -42,9 +40,9 @@ public class MessagePrinterTest {
     public void nameShouldBeSetInConsole(String input, String output) {
         //given
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8));
-        MessagePrinter messagePrinter = new MessagePrinter();
+        Printer printer = new Printer(System.out);
         //when
-        String actualName = messagePrinter.askForUserName(new Scanner(byteArrayInputStream));
+        String actualName = printer.askForUserName(new Scanner(byteArrayInputStream));
         //then
         Assert.assertEquals(actualName, output);
     }
@@ -53,9 +51,9 @@ public class MessagePrinterTest {
     public void rotateInEndlessLoopIfNameIsLongerThan_3_Letters() {
         //given
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream("LONG_NAME".getBytes(StandardCharsets.UTF_8));
-        MessagePrinter messagePrinter = new MessagePrinter();
+        Printer printer = new Printer(System.out);
         //when
-        String actualName = messagePrinter.askForUserName(new Scanner(byteArrayInputStream));
+        String actualName = printer.askForUserName(new Scanner(byteArrayInputStream));
         //then
         Assert.assertEquals(actualName, "LONG_NAME");
     }

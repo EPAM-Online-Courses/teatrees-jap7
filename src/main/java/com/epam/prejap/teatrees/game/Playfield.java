@@ -8,14 +8,14 @@ public class Playfield {
     private final byte[][] grid;
     private final int rows;
     private final int cols;
-    private final BlockPrinter printer;
+    private final Printer printer;
     private final BlockFeed feed;
 
     private Block block;
     private int row;
     private int col;
 
-    public Playfield(int rows, int cols, BlockFeed feed, BlockPrinter printer) {
+    public Playfield(int rows, int cols, BlockFeed feed, Printer printer) {
         this.rows = rows;
         this.cols = cols;
         this.feed = feed;

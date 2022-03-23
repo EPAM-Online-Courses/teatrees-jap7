@@ -11,7 +11,7 @@ import java.util.List;
  * @author Herman Kulik
  */
 class RecordHandler {
-    private final File jsonFile;
+    private final File jsonFile; //TODO change this to local variable
     private final List<Record> recordsList;
     private final JSONParser parser;
 
@@ -21,7 +21,7 @@ class RecordHandler {
         try {
             parser.uploadDataFromJson();
         } catch (IOException e) {
-            e.printStackTrace(); // TODO logger
+            System.err.println("Cannot upload data from json");
         }
         this.recordsList = parser.getRecordsList();
     }
