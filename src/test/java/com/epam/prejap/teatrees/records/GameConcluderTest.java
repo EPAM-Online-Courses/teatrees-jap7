@@ -1,5 +1,6 @@
 package com.epam.prejap.teatrees.records;
 
+import com.epam.prejap.teatrees.game.Printer;
 import com.google.gson.JsonSyntaxException;
 import org.testng.annotations.Test;
 
@@ -20,14 +21,14 @@ public class GameConcluderTest {
             String name = "her";
             ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(name.getBytes(StandardCharsets.UTF_8));
             System.setIn(byteArrayInputStream);
-            MessagePrinter messagePrinter = new MessagePrinter();
+            Printer printer = new Printer(System.out);
             Path tmp = Files.createTempFile("temp2", ".json");
             PrintStream ps = new PrintStream(tmp.toString());
             ps.println("{'records': [{'name': 'her', 'score': 3}]}");
             JSONParser jsonParser = new JSONParser(tmp.toFile());
             GameConcluder gameConcluder = new GameConcluder();
             //when
-            gameConcluder.concludeTheGame(score, tmp.toFile(), messagePrinter);
+            gameConcluder.concludeTheGame(score, tmp.toFile(), printer);
             System.setIn(console);
             //then
         } catch (IOException e) {
@@ -44,14 +45,14 @@ public class GameConcluderTest {
             String name = "herr";
             ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(name.getBytes(StandardCharsets.UTF_8));
             System.setIn(byteArrayInputStream);
-            MessagePrinter messagePrinter = new MessagePrinter();
+            Printer printer = new Printer(System.out);
             Path tmp = Files.createTempFile("temp2", ".json");
             PrintStream ps = new PrintStream(tmp.toString());
             ps.println("{'records': [{'name': 'her', 'score': 3}]}");
             JSONParser jsonParser = new JSONParser(tmp.toFile());
             GameConcluder gameConcluder = new GameConcluder();
             //when
-            gameConcluder.concludeTheGame(score, tmp.toFile(), messagePrinter);
+            gameConcluder.concludeTheGame(score, tmp.toFile(), printer);
             System.setIn(console);
             //then
         } catch (IOException e) {
@@ -68,14 +69,14 @@ public class GameConcluderTest {
             String name = "her";
             ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(name.getBytes(StandardCharsets.UTF_8));
             System.setIn(byteArrayInputStream);
-            MessagePrinter messagePrinter = new MessagePrinter();
+            Printer printer = new Printer(System.out);
             Path tmp = Files.createTempFile("temp2", ".jsn");
             PrintStream ps = new PrintStream(tmp.toString());
             ps.println("{'records': [{'name': 'her', 'scoree': 3}]}}");
             JSONParser jsonParser = new JSONParser(tmp.toFile());
             GameConcluder gameConcluder = new GameConcluder();
             //when
-            gameConcluder.concludeTheGame(score, tmp.toFile(), messagePrinter);
+            gameConcluder.concludeTheGame(score, tmp.toFile(), printer);
             System.setIn(console);
             //then
         } catch (IOException e) {

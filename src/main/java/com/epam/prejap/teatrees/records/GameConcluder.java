@@ -1,5 +1,7 @@
 package com.epam.prejap.teatrees.records;
 
+import com.epam.prejap.teatrees.game.Printer;
+
 import java.io.File;
 import java.util.Scanner;
 
@@ -17,11 +19,11 @@ public class GameConcluder {
      *
      * @param score user's score, got during the game
      * @param jsonFile a path to .json file, where all records are stored
-     * @param messagePrinter an object, responsible for interaction with user via console
+     * @param printer an object, responsible for interaction with user via console
      */
-    public void concludeTheGame(int score, File jsonFile, MessagePrinter messagePrinter) {
-        String nameOfThePlayer = messagePrinter.askForUserName(new Scanner(System.in));
+    public void concludeTheGame(int score, File jsonFile, Printer printer) {
+        String nameOfThePlayer = printer.askForUserName(new Scanner(System.in));
         boolean isNewBestRecord = new RecordHandler(jsonFile).handleNewRecord(new Record(nameOfThePlayer, score));
-        messagePrinter.printFinalMessage(isNewBestRecord, score, nameOfThePlayer);
+        printer.printFinalMessage(isNewBestRecord, score, nameOfThePlayer);
     }
 }

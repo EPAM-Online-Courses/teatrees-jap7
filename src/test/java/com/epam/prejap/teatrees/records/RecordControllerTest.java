@@ -7,10 +7,6 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author Andrzej Sadlek
- * @author Herman Kulik
- */
 public class RecordControllerTest {
     List<Record> records = new ArrayList<>();
 

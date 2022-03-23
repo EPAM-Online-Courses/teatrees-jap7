@@ -9,10 +9,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-/**
- * @author Andrzej Sadlek
- * @author Herman Kulik
- */
 @Test
 public class RecordHandlerIT {
 
