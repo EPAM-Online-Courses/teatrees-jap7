@@ -22,21 +22,20 @@ public class Playfield {
         block = feed.nextBlock();
         row = 0;
         col = (grid.cols() - block.cols()) / 2;
-        show();
+        showBlockOnGrid();
     }
 
     public boolean move(Move move) {
-        hide();
+        hideBlockOnGrid();
         boolean moved;
             switch (move) {
                 case LEFT -> moveLeft();
                 case RIGHT -> moveRight();
             }
             moved = moveDown();
-        show();
+        showBlockOnGrid();
         return moved;
     }
-
 
     private void moveRight() {
         move(0, 1);
@@ -75,37 +74,20 @@ public class Playfield {
         return true;
     }
 
-    private void hide() {
-        forEachBrick((i, j, dot) -> grid.setCell(row + i, col + j, 0));
+    private void hideBlockOnGrid() {
+        grid.hideBlock(block, row, col);
     }
 
-    private void show() {
-        forEachBrick((i, j, dot) -> grid.setCell(row + i,col + j, dot));
-        printer.draw(grid.grid());
+    private void showBlockOnGrid() {
+        grid.showBlock(block, row, col);
+        grid.print(printer);
     }
 
     private void doMove(int rowOffset, int colOffset) {
         row += rowOffset;
         col += colOffset;
     }
-
-    private void forEachBrick(BrickAction action) {
-        for (int i = 0; i < block.rows(); i++) {
-            for (int j = 0; j < block.cols(); j++) {
-                var dot = block.dotAt(i, j);
-                if (dot > 0) {
-                    action.act(i, j, dot);
-                }
-            }
-        }
-    }
-
     public void removeCompleteLines() {
         grid.removeCompleteLines();
     }
-
-    private interface BrickAction {
-        void act(int i, int j, byte dot);
-    }
-
 }

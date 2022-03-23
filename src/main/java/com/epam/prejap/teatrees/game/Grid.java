@@ -1,5 +1,7 @@
 package com.epam.prejap.teatrees.game;
 
+import com.epam.prejap.teatrees.block.Block;
+
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -8,7 +10,17 @@ import java.util.Objects;
  * @author dominik_kaminski
  * @author przemyslaw_szewczyk
  */
-record Grid(byte[][] grid, int rows, int cols) {
+final class Grid {
+    private final byte[][] grid;
+    private final int rows;
+    private final int cols;
+
+    Grid(byte[][] grid, int rows, int cols) {
+        this.grid = grid;
+        this.rows = rows;
+        this.cols = cols;
+    }
+
     Grid(int rows, int cols) {
         this(new byte[rows][cols], rows, cols);
     }
@@ -21,15 +33,9 @@ record Grid(byte[][] grid, int rows, int cols) {
         return grid[row][col];
     }
 
-    void setCell(int row, int col, int value) {
-        grid[row][col] = (byte) value;
-    }
-
     void removeCompleteLines() {
-        for (int i = rows - 1; i >= 0; i--)
-        {
-            if (isRowComplete(i))
-            {
+        for (int i = rows - 1; i >= 0; i--) {
+            if (isRowComplete(i)) {
                 dropRows(i - 1);
                 i++;
             }
@@ -37,23 +43,19 @@ record Grid(byte[][] grid, int rows, int cols) {
     }
 
     private void dropRows(int i) {
-        while (i >= 0)
-        {
-            for (int j = 0; j < cols; j++)
-            {
+        while (i >= 0) {
+            for (int j = 0; j < cols; j++) {
                 grid[i + 1][j] = grid[i][j];
             }
             i--;
         }
-        for (int j = 0; j < cols; j++)
-        {
+        for (int j = 0; j < cols; j++) {
             grid[0][j] = 0;
         }
     }
 
     private boolean isRowComplete(int row) {
-        for (int i = 0; i < cols; i++)
-        {
+        for (int i = 0; i < cols; i++) {
             if (grid[row][i] == 0) return false;
         }
         return true;
@@ -64,16 +66,7 @@ record Grid(byte[][] grid, int rows, int cols) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Grid grid1 = (Grid) o;
-        return rows == grid1.rows && cols == grid1.cols && gridMatrixEquals(grid, grid1.grid);
-    }
-
-    private boolean gridMatrixEquals(byte[][] grid1, byte[][] grid2) {
-        for (int i = 0; i < grid.length; i++) {
-            for (int j = 0; j < grid[0].length; j++) {
-                if (grid1[i][j] != grid2[i][j]) return false;
-            }
-        }
-        return true;
+        return rows == grid1.rows && cols == grid1.cols && Arrays.deepEquals(grid, grid1.grid);
     }
 
     @Override
@@ -90,5 +83,49 @@ record Grid(byte[][] grid, int rows, int cols) {
                 ", rows=" + rows +
                 ", cols=" + cols +
                 '}';
+    }
+
+    public int rows() {
+        return rows;
+    }
+
+    public int cols() {
+        return cols;
+    }
+
+    public void hideBlock(Block block, int row, int col) {
+        forEachBrick(block, (i, j, dot) -> grid[row + i][col + j] = 0);
+    }
+
+    public void showBlock(Block block, int row, int col) {
+        forEachBrick(block, (i, j, dot) -> grid[row + i][col + j] = dot);
+    }
+
+    private void forEachBrick(Block block, BrickAction action) {
+        for (int i = 0; i < block.rows(); i++) {
+            for (int j = 0; j < block.cols(); j++) {
+                var dot = block.dotAt(i, j);
+                if (dot > 0) {
+                    action.act(i, j, dot);
+                }
+            }
+        }
+    }
+
+    public void print(Printer printer) {
+        printer.clear();
+        printer.border(cols);
+        for (byte[] bytes : grid) {
+            printer.startRow();
+            for (byte aByte : bytes) {
+                printer.print(aByte);
+            }
+            printer.endRow();
+        }
+        printer.border(cols);
+    }
+
+    private interface BrickAction {
+        void act(int i, int j, byte dot);
     }
 }
