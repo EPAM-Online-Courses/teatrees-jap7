@@ -17,7 +17,7 @@ import java.util.List;
 class JSONParser {
     private List<Record> recordsList;
     private RecordCollector recordCollector;
-    private File jsonFile;
+    private final File jsonFile;
 
     JSONParser(File fileToParse) {
         jsonFile = fileToParse;
@@ -61,7 +61,7 @@ class JSONParser {
             writer.write("");
             writer.flush();
         } catch (IOException e) {
-            System.err.println("Cannot clear score.json file"); // TODO logging
+            System.err.println("Cannot clear score.json file");
         }
     }
 

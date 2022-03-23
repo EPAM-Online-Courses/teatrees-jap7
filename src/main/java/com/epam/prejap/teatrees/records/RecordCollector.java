@@ -21,8 +21,8 @@ class RecordCollector {
         }
     }
 
-    RecordCollector(List<Record> records) { //TODO isnt it a null anyway?
-        if (records != null)
-            this.records = records;
+    RecordCollector(List<Record> records) {
+        if (records == null) throw new IllegalArgumentException();
+        this.records = records;
     }
 }

@@ -11,12 +11,10 @@ import java.util.List;
  * @author Herman Kulik
  */
 class RecordHandler {
-    private final File jsonFile; //TODO change this to local variable
     private final List<Record> recordsList;
     private final JSONParser parser;
 
     RecordHandler(File jsonFile) {
-        this.jsonFile = jsonFile;
         this.parser = new JSONParser(jsonFile);
         try {
             parser.uploadDataFromJson();
