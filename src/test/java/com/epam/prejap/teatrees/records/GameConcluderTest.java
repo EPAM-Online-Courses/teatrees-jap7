@@ -13,7 +13,7 @@ import java.util.NoSuchElementException;
 public class GameConcluderTest {
 
     @Test
-    public void gameIsConcludedSuccessfully() {
+    public void gameIsConcludedSuccessfully() { //TODO what with that test
         try {
             InputStream console = System.in;
             //given
@@ -83,5 +83,4 @@ public class GameConcluderTest {
             System.err.println("Game can't conclude");
         }
     }
-
 }
