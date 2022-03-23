@@ -18,15 +18,6 @@ public class RecordControllerTest {
     }
 
     @Test
-    public void recordsShouldBeEqual() {
-        //given
-        RecordCollector scoreRecord = new RecordCollector(records);
-        //when
-        //then
-        Assert.assertEquals(records, scoreRecord.getRecords());
-    }
-
-    @Test
     public void recordsShouldNotBeUpdated() {
         //given
         RecordCollector scoreRecord = new RecordCollector(records);
