@@ -72,6 +72,7 @@
                 <consoleOutput>true</consoleOutput>
                 <failsOnError>true</failsOnError>
                 <linkXRef>false</linkXRef>
+                <violationSeverity>error</violationSeverity>
             </configuration>
             <executions>
                 <execution>
@@ -82,6 +83,13 @@
                     </goals>
                 </execution>
             </executions>
+            <dependencies>
+                <dependency>
+                    <groupId>com.puppycrawl.tools</groupId>
+                    <artifactId>checkstyle</artifactId>
+                    <version>10.0</version>
+                </dependency>
+            </dependencies>
         </plugin>
         <plugin>
             <groupId>org.apache.maven.plugins</groupId>
