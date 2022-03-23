@@ -33,9 +33,37 @@ final class Grid {
         return grid[row][col];
     }
 
-    public void removeCompleteLines() {
-        int bound = 0;
+    /**
+     * It works like this - firstly it finds the first row that has only zeros and sets it
+     * as a bound. Secondly it counts how many times line removal occurred. Finally, it creates
+     * new lines below the bound. Obviously number of created lines is equal to the number of
+     * removed lines.
+     */
+    void removeCompleteLines() {
         int[] fallingRows = new int[rows];
+        int bound = getWorkAreaBound(fallingRows);
+        int counter = countRemovedLines(fallingRows, bound);
+        fillEmptySpace(bound, counter);
+    }
+
+    private void fillEmptySpace(int bound, int counter) {
+        while (counter > 0) {
+            grid[bound + counter - 1] = new byte[cols];
+            counter--;
+        }
+    }
+
+    private int countRemovedLines(int[] fallingRows, int bound) {
+        int counter = 0;
+        for (int i = rows - 1; i >= bound; i--) {
+            if (fallingRows[i] == 0) counter++;
+            else grid[i + counter] = grid[i];
+        }
+        return counter;
+    }
+
+    private int getWorkAreaBound(int[] fallingRows) {
+        int bound = 0;
         for (int i = rows - 1; i >= 0; i--) {
             for (int j = 1; j < cols; j++) {
                 if (grid[i][j] != grid[i][j - 1]) {
@@ -48,17 +76,7 @@ final class Grid {
                 break;
             }
         }
-
-        int counter = 0;
-        for (int i = rows - 1; i >= bound; i--) {
-            if (fallingRows[i] == 0) counter++;
-            else grid[i + counter] = grid[i];
-        }
-
-        while (counter > 0) {
-            grid[bound + counter - 1] = new byte[cols];
-            counter--;
-        }
+        return bound;
     }
 
     @Override
@@ -85,19 +103,19 @@ final class Grid {
                 '}';
     }
 
-    public int rows() {
+    int rows() {
         return rows;
     }
 
-    public int cols() {
+    int cols() {
         return cols;
     }
 
-    public void hideBlock(Block block, int row, int col) {
+    void hideBlock(Block block, int row, int col) {
         forEachBrick(block, (i, j, dot) -> grid[row + i][col + j] = 0);
     }
 
-    public void showBlock(Block block, int row, int col) {
+    void showBlock(Block block, int row, int col) {
         forEachBrick(block, (i, j, dot) -> grid[row + i][col + j] = dot);
     }
 
@@ -112,7 +130,7 @@ final class Grid {
         }
     }
 
-    public void print(Printer printer) {
+    void print(Printer printer) {
         printer.clear();
         printer.border(cols);
         for (byte[] bytes : grid) {
