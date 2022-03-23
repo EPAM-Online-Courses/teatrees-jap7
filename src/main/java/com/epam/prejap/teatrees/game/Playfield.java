@@ -22,7 +22,7 @@ public class Playfield {
         block = feed.nextBlock();
         row = 0;
         col = (grid.cols() - block.cols()) / 2;
-        showBlockOnGrid();
+        showBlockOnScreen();
     }
 
     public boolean move(Move move) {
@@ -33,7 +33,7 @@ public class Playfield {
                 case RIGHT -> moveRight();
             }
             moved = moveDown();
-        showBlockOnGrid();
+        showBlockOnScreen();
         return moved;
     }
 
@@ -78,7 +78,7 @@ public class Playfield {
         grid.hideBlock(block, row, col);
     }
 
-    private void showBlockOnGrid() {
+    private void showBlockOnScreen() {
         grid.showBlock(block, row, col);
         grid.print(printer);
     }
@@ -87,6 +87,7 @@ public class Playfield {
         row += rowOffset;
         col += colOffset;
     }
+
     public void removeCompleteLines() {
         grid.removeCompleteLines();
     }

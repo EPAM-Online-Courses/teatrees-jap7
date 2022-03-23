@@ -33,32 +33,32 @@ final class Grid {
         return grid[row][col];
     }
 
-    void removeCompleteLines() {
+    public void removeCompleteLines() {
+        int bound = 0;
+        int[] fallingRows = new int[rows];
         for (int i = rows - 1; i >= 0; i--) {
-            if (isRowComplete(i)) {
-                dropRows(i - 1);
-                i++;
+            for (int j = 1; j < cols; j++) {
+                if (grid[i][j] != grid[i][j - 1]) {
+                    fallingRows[i] = 1;
+                    break;
+                }
+            }
+            if (fallingRows[i] == 0 && grid[i][0] == 0) {
+                bound = i;
+                break;
             }
         }
-    }
 
-    private void dropRows(int i) {
-        while (i >= 0) {
-            for (int j = 0; j < cols; j++) {
-                grid[i + 1][j] = grid[i][j];
-            }
-            i--;
+        int counter = 0;
+        for (int i = rows - 1; i >= bound; i--) {
+            if (fallingRows[i] == 0) counter++;
+            else grid[i + counter] = grid[i];
         }
-        for (int j = 0; j < cols; j++) {
-            grid[0][j] = 0;
-        }
-    }
 
-    private boolean isRowComplete(int row) {
-        for (int i = 0; i < cols; i++) {
-            if (grid[row][i] == 0) return false;
+        while (counter > 0) {
+            grid[bound + counter - 1] = new byte[cols];
+            counter--;
         }
-        return true;
     }
 
     @Override
