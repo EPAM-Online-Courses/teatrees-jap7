@@ -1,4 +1,10 @@
 package com.epam.prejap.teatrees.block;
+**
+        * Adds U-block shape to the game.
+        *
+        * @author Maciej Drobot
+        * @author Malgorzata Lasota
+        */
 
 final class UBlock extends Block {
 
