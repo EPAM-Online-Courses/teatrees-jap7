@@ -39,12 +39,12 @@ public class UBlockTest {
 
         // then
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(uBlock.image[0][0], 1);
-        softAssert.assertEquals(uBlock.image[0][1], 0);
-        softAssert.assertEquals(uBlock.image[0][2], 1);
-        softAssert.assertEquals(uBlock.image[1][0], 1);
-        softAssert.assertEquals(uBlock.image[1][1], 1);
-        softAssert.assertEquals(uBlock.image[1][2], 1);
+        softAssert.assertEquals(uBlock.dotAt(0, 0), 1);
+        softAssert.assertEquals(uBlock.dotAt(0, 1), 0);
+        softAssert.assertEquals(uBlock.dotAt(0, 2), 1);
+        softAssert.assertEquals(uBlock.dotAt(1, 0), 1);
+        softAssert.assertEquals(uBlock.dotAt(1, 1), 1);
+        softAssert.assertEquals(uBlock.dotAt(1, 2), 1);
         softAssert.assertAll();
     }
 }
