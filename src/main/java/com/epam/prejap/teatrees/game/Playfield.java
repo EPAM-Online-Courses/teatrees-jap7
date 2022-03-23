@@ -88,6 +88,9 @@ public class Playfield {
         col += colOffset;
     }
 
+    /**
+     * @see Grid#removeCompleteLines()
+     */
     public void removeCompleteLines() {
         grid.removeCompleteLines();
     }
