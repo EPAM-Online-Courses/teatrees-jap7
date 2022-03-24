@@ -35,6 +35,7 @@ public class GridTest {
                 {new Grid(new byte[][] {{0,0,0},{1,0,1},{1,1,1}}), new Grid(new byte[][] {{0,0,0},{0,0,0},{1,0,1}})},
                 {new Grid(new byte[][] {{0,0,0},{1,1,1},{1,0,1}}), new Grid(new byte[][] {{0,0,0},{0,0,0},{1,0,1}})},
                 {new Grid(new byte[][] {{0,1,0},{1,1,1},{1,1,1}}), new Grid(new byte[][] {{0,0,0},{0,0,0},{0,1,0}})},
+                {new Grid(new byte[][] {{1,1,1},{1,0,1},{1,1,1}}), new Grid(new byte[][] {{0,0,0},{0,0,0},{1,0,1}})},
         };
     }
 
