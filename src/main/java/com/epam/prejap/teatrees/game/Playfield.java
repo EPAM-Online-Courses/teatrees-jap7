@@ -21,7 +21,7 @@ public class Playfield {
     public void nextBlock() {
         block = feed.nextBlock();
         row = 0;
-        col = (grid.cols() - block.cols()) / 2;
+        col = (grid.getNumberOfCols() - block.cols()) / 2;
         showBlockOnScreen();
     }
 
@@ -65,7 +65,7 @@ public class Playfield {
                 if (dot > 0) {
                     int newRow = row + i + rowOffset;
                     int newCol = col + j + colOffset;
-                    if (newRow >= grid.rows() || newCol >= grid.cols() || grid.cellAt(newRow, newCol) > 0) {
+                    if (newRow >= grid.getNumberOfRows() || newCol >= grid.getNumberOfCols() || grid.cellAt(newRow, newCol) > 0) {
                         return false;
                     }
                 }

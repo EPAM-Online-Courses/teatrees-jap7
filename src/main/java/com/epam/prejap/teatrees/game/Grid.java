@@ -103,11 +103,11 @@ final class Grid {
                 '}';
     }
 
-    int rows() {
+    int getNumberOfRows() {
         return rows;
     }
 
-    int cols() {
+    int getNumberOfCols() {
         return cols;
     }
 
