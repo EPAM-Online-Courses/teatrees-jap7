@@ -6,9 +6,9 @@ import java.io.File;
 import java.util.Scanner;
 
 /**
- * Summing up game flow, interacting with a user, using {@link MessagePrinter}
+ * Summing up game flow, interacting with a user, using {@link Printer}
  * Start .json parsing, by {@link RecordHandler} methods invocation
- * Ties {@link RecordHandler} logic with {@link MessagePrinter} logic, to print appropriate message for user
+ * Ties {@link RecordHandler} logic with {@link Printer} logic, to print appropriate message for user
  *
  * @author Andrzej Sadlek
  * @author Herman Kulik

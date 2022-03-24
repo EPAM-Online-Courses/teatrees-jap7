@@ -11,6 +11,11 @@ import java.util.List;
 class RecordCollector {
     private List<Record> records;
 
+    RecordCollector(List<Record> records) {
+        if (records == null) throw new IllegalArgumentException();
+        this.records = records;
+    }
+
     List<Record> getRecords() {
         return new ArrayList<>(records);
     }
@@ -19,10 +24,5 @@ class RecordCollector {
         if (newRecords != null) {
             records = newRecords;
         }
-    }
-
-    RecordCollector(List<Record> records) { //TODO isnt it a null anyway?
-        if (records != null)
-            this.records = records;
     }
 }
