@@ -7,8 +7,8 @@ import java.util.Objects;
 
 /**
  * Provides Playfield an api for working with 2D array.
- * @author dominik_kaminski
- * @author przemyslaw_szewczyk
+ * @author Dominik Kaminski
+ * @author Przemyslaw Szewczyk
  */
 final class Grid {
     private final byte[][] grid;
@@ -90,7 +90,7 @@ final class Grid {
     @Override
     public int hashCode() {
         int result = Objects.hash(rows, cols);
-        result = 31 * result + Arrays.hashCode(grid);
+        result = 31 * result + Arrays.deepHashCode(grid);
         return result;
     }
 
