@@ -15,7 +15,7 @@ final class Grid {
     private final int rows;
     private final int cols;
 
-    Grid(byte[][] grid, int rows, int cols) {
+    private Grid(byte[][] grid, int rows, int cols) {
         this.grid = grid;
         this.rows = rows;
         this.cols = cols;
