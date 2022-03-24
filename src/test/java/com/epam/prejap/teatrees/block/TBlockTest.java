@@ -19,49 +19,12 @@ import static org.testng.Assert.assertEquals;
 public class TBlockTest {
 
     private TBlock tBlock;
-    private ByteArrayOutputStream outputStream;
-    TeaTrees teatrees;
-    BlockFeed blockFeed;
-    Printer printer;
-    Playfield playfield;
-    Waiter waiter;
-    Player player;
 
     @BeforeMethod
     private void setup() {
         tBlock = new TBlock();
-        outputStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outputStream));
-        blockFeed = new BlockFeed();
-        printer = new Printer(System.out);
-        playfield = new Playfield(10, 20, blockFeed, printer);
-        player = new RandomPlayer();
-        waiter = new Waiter(10);
-        teatrees = new TeaTrees(playfield, waiter, player);
     }
 
-    /**
-     * Method that intercepts console output and checks if it matches the desired output (block shapes).
-     * It plays the game using the play() method and executes the game in a default mode when you don't pass
-     * a parameter to the play method, or uses a specified block when you use a parametrized method
-     * (e.g. 0 if using a default square block, 1 if using T-block, etc.)
-     */
-    public void shouldHave3HashesInSecondRowAnd1InThirdRow(){
-        //given
-        var game = teatrees.play(1);
-        String first2Lines = "|" + new String(" ").repeat(8) + "###" + " ".repeat(9) + "|" +"\n"
-                + "|" + " ".repeat(9) + "#" + new String(" ").repeat(10) + "|";
-
-        //when
-        String[] outputFromConsole = outputStream.toString().split("\n");
-        String result = outputFromConsole[1] + "\n" + outputFromConsole[2];
-        //then
-        assertEquals(first2Lines, result);
-    }
-
-    /**
-     * Checks if the shape of T-block is correct in terms of columns.
-     */
     public void shouldHave3Columns() {
         //given
         int columnsNumber = 3;
@@ -80,8 +43,4 @@ public class TBlockTest {
         assertEquals(rowsNumber, actualRows);
     }
 
-    @AfterMethod
-    private void cleanup() {
-        System.setOut(System.out);
-    }
 }

@@ -16,10 +16,10 @@ import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 
 /**
- * An integration test is blocks.
+ * This test class is intended to contain any other block tests apart from TBlock integration test.
+ * Feel free to implement more!
  *
  * @author Krzysztof Jaczewski
- * @author Pawel Kierat
  */
 
 @Test

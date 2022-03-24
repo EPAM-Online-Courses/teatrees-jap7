@@ -8,6 +8,9 @@ import com.epam.prejap.teatrees.game.Waiter;
 import com.epam.prejap.teatrees.player.Player;
 import com.epam.prejap.teatrees.player.RandomPlayer;
 
+/**
+ * This is the main class to run the game.
+ */
 public class TeaTrees {
 
     private final Playfield playfield;
@@ -20,17 +23,18 @@ public class TeaTrees {
         this.player = player;
     }
 
-    public Score play(int... index) {
+    /**
+     * Method running the game, executing all possible moves in a loop and implementing desired delay between each step.
+     *
+     * @return total score achieved in this game
+     */
+    public Score play() {
         boolean moved;
         int score = 0;
         do {
             moved = false;
 
-            if (index.length == 0) {
-                playfield.nextBlock();
-            } else {
-                playfield.nextBlock(index[0]);
-            }
+            playfield.nextBlock();
             score++;
 
             boolean nextMove;
