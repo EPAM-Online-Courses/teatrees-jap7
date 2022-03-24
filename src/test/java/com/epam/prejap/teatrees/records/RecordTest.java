@@ -38,11 +38,10 @@ public class RecordTest {
         System.setOut(printStream);
         Record record = new Record("one", 1);
         //when
-        System.setOut(console);
-        //then
         System.out.println(record);
-       // assertEquals(outputStream.toString(), "<<<player: one, top score: 1>>>\n", "Output is not the same"); //TODO why not working
-        assertTrue(record.toString().equals("<<<player: one, top score: 1>>>"));
+        //then
+        System.setOut(console);
+        assertEquals(outputStream.toString(), "<<<player: one, top score: 1>>>\n", "Output is not the same");
     }
 
 }

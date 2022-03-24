@@ -2,7 +2,13 @@ package com.epam.prejap.teatrees.game;
 
 import java.io.PrintStream;
 import java.util.Scanner;
-//TODO javadocs
+
+/**
+ * Responsible for printing grid, blocks and messages to console
+ *
+ * @author Andrzej Sadlek
+ * @author Herman Kulik
+ */
 public class Printer {
 
     final PrintStream out;
@@ -29,7 +35,7 @@ public class Printer {
     }
 
     void print(byte dot) {
-        out.format(dot == 0 ? " " :"#");
+        out.format(dot == 0 ? " " : "#");
     }
 
     void startRow() {
@@ -44,6 +50,13 @@ public class Printer {
         out.println("+" + "-".repeat(width) + "+");
     }
 
+    /**
+     * Prints the concluding message about achieved score. In case of new record prints additional message.
+     *
+     * @param isNewBestRecord indicates whether new score is the best yet for the Player
+     * @param score           user's score, got during the game
+     * @param nameOfThePlayer
+     */
     public void printFinalMessage(boolean isNewBestRecord, int score, String nameOfThePlayer) {
         System.out.println("\nScore: " + score);
         if (isNewBestRecord) {
@@ -51,6 +64,11 @@ public class Printer {
         }
     }
 
+    /**
+     * Asks Player for his name that can be only 3 characters long.
+     *
+     * @param scanner and object, responsible for scanning Player's output
+     */
     public String askForUserName(Scanner scanner) {
         System.out.println("Type your name (only 3 letters allowed): ");
         String nameOfThePlayer = scanner.nextLine();

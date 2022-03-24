@@ -6,7 +6,7 @@ import java.util.Objects;
  * @author Andrzej Sadlek
  * @author Herman Kulik
  */
-class Record implements Comparable<Record> { //TODO make it a record
+class Record implements Comparable<Record> {
     private final String name;
     private final int score;
 
