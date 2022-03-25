@@ -40,6 +40,7 @@ public class BlockIT {
     static Object[] blockTests() {
         return new Object[] {
             new BlockIT(new OBlock(), "|##|\n|##|\n"),
+                new BlockIT(new UBlock(), "|# #|\n|###|\n"),
         };
     }
 
