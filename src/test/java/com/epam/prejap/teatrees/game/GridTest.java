@@ -6,7 +6,6 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
 /**
- * Provides Playfield an api for working with 2D array.
  * @author Dominik Kaminski
  * @author Przemyslaw Szewczyk
  */
