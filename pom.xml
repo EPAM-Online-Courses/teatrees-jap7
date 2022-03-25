@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<modelVersion>4.0.0</modelVersion>
 
     <groupId>com.epam.prejap</groupId>
     <artifactId>tea-trees</artifactId>
@@ -16,7 +16,7 @@
         <version.maven>3.8.1</version.maven>
         <version.plugin.maven.enforcer>3.0.0-M2</version.plugin.maven.enforcer>
         <version.plugin.maven.jar>3.2.0</version.plugin.maven.jar>
-        <version.testng>7.4.0</version.testng>
+        <version.testng>7.5</version.testng>
         <version.mockito.core>4.4.0</version.mockito.core>
         <version.mockito.inline>4.4.0</version.mockito.inline>
     </properties>
