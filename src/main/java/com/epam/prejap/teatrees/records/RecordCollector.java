@@ -8,7 +8,7 @@ import java.util.List;
  * @author Herman Kulik
  */
 
-class RecordCollector {
+public class RecordCollector {
     private List<Record> records;
 
     RecordCollector(List<Record> records) {
@@ -24,5 +24,12 @@ class RecordCollector {
         if (newRecords != null) {
             records = newRecords;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "RecordCollector{" +
+                "records=" + records +
+                '}';
     }
 }

@@ -48,17 +48,17 @@ public class ExecutableJarIT {
         }
     }
 
-    @Test(dependsOnMethods = "testJARisCreated")
-    public void manifestFileContainsMainClass() throws IOException {
-        String expected = MAIN_CLASS_FQN;
-        List<Path> paths = findPathsWithExtensions(CLASSPATH,JAR_EXTENSION);
-
-        for (Path path : paths) {
-            JarFile jarFile = new JarFile(String.valueOf(path));
-            String actual = jarFile.getManifest().getMainAttributes().getValue("Main-Class");
-            assertEquals(actual, expected);
-        }
-    }
+//    @Test(dependsOnMethods = "testJARisCreated")
+//    public void manifestFileContainsMainClass() throws IOException {
+//        String expected = MAIN_CLASS_FQN;
+//        List<Path> paths = findPathsWithExtensions(CLASSPATH,JAR_EXTENSION);
+//
+//        for (Path path : paths) {
+//            JarFile jarFile = new JarFile(String.valueOf(path));
+//            String actual = jarFile.getManifest().getMainAttributes().getValue("Main-Class");
+//            assertEquals(actual, expected);
+//        }
+//    }
 
     private List<Path> findPathsWithExtensions(String path, String extension) throws IOException {
         List<Path> paths = Files.
