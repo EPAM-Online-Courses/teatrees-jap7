@@ -58,8 +58,8 @@ public class BlockIT {
     @Test
     public void shouldDisplayBlock() {
         //given
-        var game = teatrees.play();
         //when
+        teatrees.play();
         String outputFromConsole = outputStream.toString();
         //then
         System.out.println(outputFromConsole);
