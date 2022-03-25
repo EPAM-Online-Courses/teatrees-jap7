@@ -62,7 +62,6 @@ public class BlockIT {
         //when
         String outputFromConsole = outputStream.toString();
         //then
-        System.out.println(outputFromConsole);
         assertThat(outputFromConsole).contains(blockLines);
     }
 

@@ -13,15 +13,13 @@ public class LBlockTest {
     public void rows_ShouldReturn3() {
         int expected = 3;
         int actual = lBlock.rows();
-        assertEquals(actual, expected,
-                String.format("Number of rows is incorrect.%nExpected: %d, actual: %d", expected, actual));
+        assertEquals(actual, expected);
     }
 
     public void cols_shouldReturn2() {
         int expected = 2;
         int actual = lBlock.cols();
-        assertEquals(actual, expected,
-                String.format("Number of cols is incorrect.%nExpected: %d, actual: %d", expected, actual));
+        assertEquals(actual, expected);
     }
 
     @Test(dataProvider = "hashPositions")
