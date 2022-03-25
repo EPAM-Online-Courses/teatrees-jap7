@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
@@ -61,32 +62,22 @@ class TeaTrees {
         var playfield = new Playfield(rows, cols, feed, printer);
         var game = new TeaTrees(playfield, new Waiter(delay), new RandomPlayer());
 
-        //var score = game.play();
+
+        try {
+//            File jarDir = new File(ClassLoader.getSystemClassLoader().getResource(".").toURI());
+            File jarDir = new File(TeaTrees.class.getProtectionDomain().getCodeSource().getLocation().toURI());
+            String parent = jarDir.getParent();
+            File newFile = new File(parent + "/temporary");
+            newFile.createNewFile();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+
+//        var score = game.play();
 
         GameConcluder gameConcluder = new GameConcluder();
 
-        String jsonString = game.getFileFromResourceAsStream("score.json");
-        System.out.println(jsonString);
-        Gson g = new Gson();
-        RecordCollector recordCollector = g.fromJson(jsonString, RecordCollector.class);
-
-        File json = new File(Objects.requireNonNull(TeaTrees.class.getClassLoader().getResource("score.json")).getFile());
-        gameConcluder.concludeTheGame(1, json, printer);
+        gameConcluder.concludeTheGame(1, printer);
     }
 
-    private String getFileFromResourceAsStream(String fileName) throws IOException {
-
-        // The class loader that loaded the class
-        ClassLoader classLoader = getClass().getClassLoader();
-        InputStream inputStream = classLoader.getResourceAsStream(fileName);
-        String text = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
-
-        // the stream holding the file content
-        if (inputStream == null) {
-            throw new IllegalArgumentException("file not found! " + fileName);
-        } else {
-            return text;
-        }
-
-    }
 }

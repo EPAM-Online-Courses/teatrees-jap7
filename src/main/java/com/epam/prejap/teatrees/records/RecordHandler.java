@@ -1,7 +1,11 @@
 package com.epam.prejap.teatrees.records;
 
+import com.google.gson.Gson;
+
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -11,17 +15,39 @@ import java.util.List;
  * @author Herman Kulik
  */
 class RecordHandler {
-    private final List<Record> recordsList;
+    private List<Record> recordsList;
     private final JSONParser parser;
 
-    RecordHandler(File jsonFile) {
-        this.parser = new JSONParser(jsonFile);
+    RecordHandler() {
+        this.parser = new JSONParser();
         try {
-            parser.uploadDataFromJson();
+            parser.uploadDataFromExternalJson(); //TODO szuka zewnetrzny plik
+            recordsList = parser.getRecordsList();
         } catch (IOException e) {
-            System.err.println("Cannot upload data from json");
+            try {
+                String jsonInString = searchInsideJar();
+                recordsList = parseFromJsonString(jsonInString);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            System.err.println("Cannot upload data from json");// TODO to szuka w jarze
         }
-        this.recordsList = parser.getRecordsList();
+    }
+
+    private List<Record> parseFromJsonString(String jsonInString) {
+        Gson g = new Gson();
+        RecordCollector recordCollector = g.fromJson(jsonInString, RecordCollector.class);
+        return recordCollector.getRecords();
+    }
+
+
+    private String searchInsideJar() throws IOException {
+        ClassLoader classLoader = getClass().getClassLoader();
+        InputStream inputStream = classLoader.getResourceAsStream("score.json");
+        if (inputStream == null) {
+            throw new IllegalArgumentException("file not found! " + "score.json");
+        }
+        return new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
     }
 
     List<Record> getHighScore() {

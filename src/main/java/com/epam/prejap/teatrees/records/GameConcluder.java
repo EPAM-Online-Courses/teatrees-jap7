@@ -21,9 +21,9 @@ public class GameConcluder {
      * @param jsonFile a path to .json file, where all records are stored
      * @param printer an object, responsible for interaction with user via console
      */
-    public void concludeTheGame(int score, File jsonFile, Printer printer) {
+    public void concludeTheGame(int score, Printer printer) {
         String nameOfThePlayer = printer.askForUserName(new Scanner(System.in));
-        boolean isNewBestRecord = new RecordHandler(jsonFile).handleNewRecord(new Record(nameOfThePlayer, score));
+        boolean isNewBestRecord = new RecordHandler().handleNewRecord(new Record(nameOfThePlayer, score));
         printer.printFinalMessage(isNewBestRecord, score, nameOfThePlayer);
     }
 }
