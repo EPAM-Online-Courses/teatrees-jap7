@@ -2,8 +2,7 @@ package com.epam.prejap.teatrees.game;
 
 import com.epam.prejap.teatrees.block.Block;
 
-import java.util.Arrays;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * Provides Playfield an api for working with 2D array.
@@ -11,14 +10,26 @@ import java.util.Objects;
  * @author Przemyslaw Szewczyk
  */
 final class Grid {
-    private final byte[][] grid;
+    private final List<List<Byte>> grid;
     private final int rows;
     private final int cols;
 
     private Grid(byte[][] grid, int rows, int cols) {
-        this.grid = grid;
+        this.grid = translateMatrix(grid);
         this.rows = rows;
         this.cols = cols;
+    }
+
+    private List<List<Byte>> translateMatrix(byte[][] matrix) {
+        List<List<Byte>> grid = new LinkedList<List<Byte>>();
+        for (byte[] bytes : matrix) {
+            List<Byte> row = new ArrayList<>(bytes.length);
+            for (byte aByte : bytes) {
+                row.add(aByte);
+            }
+            grid.add(row);
+        }
+        return grid;
     }
 
     Grid(int rows, int cols) {
@@ -30,7 +41,7 @@ final class Grid {
     }
 
     int cellAt(int row, int col) {
-        return grid[row][col];
+        return grid.get(row).get(col);
     }
 
     /**
@@ -41,22 +52,31 @@ final class Grid {
     void removeCompleteLines() {
         boolean[] fallingRows = new boolean[rows];
         int bound = getWorkAreaBound(fallingRows);
-        int counter = countRemovedLines(fallingRows, bound);
+        int counter = getNumberOfLinesThatNeedToBeRemoved(fallingRows, bound);
+        removeMarkedLines(fallingRows, bound);
         fillEmptySpace(bound, counter);
     }
 
+    private void removeMarkedLines(boolean[] fallingRows, int bound) {
+        for (int i = rows - 1; i > bound; i--)
+        {
+            if (!fallingRows[i]) {
+                grid.remove(i);
+            }
+        }
+    }
+
     private void fillEmptySpace(int bound, int counter) {
-        while (counter > 0) {
-            grid[bound + counter - 1] = new byte[cols];
+        while (counter > 1) {
+            grid.add(bound, new ArrayList<>(grid.get(bound)));
             counter--;
         }
     }
 
-    private int countRemovedLines(boolean[] fallingRows, int bound) {
+    private int getNumberOfLinesThatNeedToBeRemoved(boolean[] fallingRows, int bound) {
         int counter = 0;
         for (int i = rows - 1; i >= bound; i--) {
             if (!fallingRows[i]) counter++;
-            else grid[i + counter] = grid[i];
         }
         return counter;
     }
@@ -65,7 +85,7 @@ final class Grid {
         int bound = 0;
         for (int i = rows - 1; i >= 0; i--) {
             fallingRows[i] = isHeterogeneous(i);
-            if (!fallingRows[i] && grid[i][0] == 0) {
+            if (!fallingRows[i] && grid.get(i).get(0) == 0) {
                 bound = i;
                 break;
             }
@@ -75,7 +95,7 @@ final class Grid {
 
     private boolean isHeterogeneous(int i) {
         for (int j = 1; j < cols; j++) {
-            if (grid[i][j] != grid[i][j - 1]) {
+            if (!grid.get(i).get(j).equals(grid.get(i).get(j - 1))) {
                 return true;
             }
         }
@@ -87,20 +107,20 @@ final class Grid {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Grid grid1 = (Grid) o;
-        return rows == grid1.rows && cols == grid1.cols && Arrays.deepEquals(grid, grid1.grid);
+        return rows == grid1.rows && cols == grid1.cols && grid.equals(grid1.grid);
     }
 
     @Override
     public int hashCode() {
         int result = Objects.hash(rows, cols);
-        result = 31 * result + Arrays.deepHashCode(grid);
+        result = 31 * result + Objects.hashCode(grid);
         return result;
     }
 
     @Override
     public String toString() {
         return "Grid{" +
-                "grid=" + Arrays.deepToString(grid) +
+                "grid=" + grid +
                 ", rows=" + rows +
                 ", cols=" + cols +
                 '}';
@@ -115,11 +135,17 @@ final class Grid {
     }
 
     void hideBlock(Block block, int row, int col) {
-        forEachBrick(block, (i, j, dot) -> grid[row + i][col + j] = 0);
+        forEachBrick(block, (i, j, dot) -> {
+            Byte aByte = grid.get(row + i).get(col + j);
+            aByte = 0;
+        });
     }
 
     void showBlock(Block block, int row, int col) {
-        forEachBrick(block, (i, j, dot) -> grid[row + i][col + j] = dot);
+        forEachBrick(block, (i, j, dot) -> {
+            Byte aByte = grid.get(row + i).get(col + j);
+            aByte = dot;
+        });
     }
 
     private void forEachBrick(Block block, BrickAction action) {
@@ -136,14 +162,18 @@ final class Grid {
     void print(Printer printer) {
         printer.clear();
         printer.border(cols);
-        for (byte[] bytes : grid) {
+        for (List<Byte> row : grid) {
             printer.startRow();
-            for (byte aByte : bytes) {
-                printer.print(aByte);
-            }
+            printRow(row, printer);
             printer.endRow();
         }
         printer.border(cols);
+    }
+
+    private void printRow(List<Byte> row, Printer printer) {
+        for (Byte aByte : row) {
+            printer.print(aByte);
+        }
     }
 
     private interface BrickAction {

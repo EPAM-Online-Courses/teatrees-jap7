@@ -11,7 +11,7 @@ import static org.testng.Assert.*;
  */
 public class GridTest {
 
-    @Test(dataProvider = "gridWithCompleteLinesProvider")
+    @Test(dataProvider = "doroboty")
     public void shouldRemoveCompleteLines(Grid grid, Grid expectedGrid)
     {
         // given
@@ -38,6 +38,14 @@ public class GridTest {
                 {new Grid(new byte[][] {{0,0}, {1,1}}), new Grid(new byte[][] {{0,0}, {0,0}})},
                 {new Grid(new byte[][] {{0,0,0},{1,0,1},{1,1,1}}), new Grid(new byte[][] {{0,0,0},{0,0,0},{1,0,1}})},
                 {new Grid(new byte[][] {{0,0,0},{1,1,1},{1,0,1}}), new Grid(new byte[][] {{0,0,0},{0,0,0},{1,0,1}})},
+                {new Grid(new byte[][] {{0,1,0},{1,1,1},{1,1,1}}), new Grid(new byte[][] {{0,0,0},{0,0,0},{0,1,0}})},
+                {new Grid(new byte[][] {{1,1,1},{1,0,1},{1,1,1}}), new Grid(new byte[][] {{0,0,0},{0,0,0},{1,0,1}})},
+        };
+    }
+    @DataProvider
+    public Object[][] doroboty()
+    {
+        return new Object[][] {
                 {new Grid(new byte[][] {{0,1,0},{1,1,1},{1,1,1}}), new Grid(new byte[][] {{0,0,0},{0,0,0},{0,1,0}})},
                 {new Grid(new byte[][] {{1,1,1},{1,0,1},{1,1,1}}), new Grid(new byte[][] {{0,0,0},{0,0,0},{1,0,1}})},
         };
