@@ -16,25 +16,25 @@ import java.util.Scanner;
 
 public class PrinterTest {
 
-    @Test
-    public void conclusionShouldWriteCorrectMessage() {
-        //given
-        PrintStream console = System.out;
-        ByteArrayOutputStream bArray = new ByteArrayOutputStream();
-        PrintStream printStream = new PrintStream(bArray);
-        System.setOut(printStream);
-        Printer printer = new Printer(System.out);
-        //when
-        printer.printFinalMessage(true, 1000, "har");
-        System.setOut(console);
-        //then
-        SoftAssert softAssert = new SoftAssert();
-        softAssert.assertTrue(bArray.toString().contains("har"));
-        softAssert.assertTrue(bArray.toString().contains("Congrats! It's your new record har!"));
-        softAssert.assertTrue(bArray.toString().contains("1000"));
-        softAssert.assertAll();
-
-    }
+//    @Test
+//    public void conclusionShouldWriteCorrectMessage() {
+//        //given
+//        PrintStream console = System.out;
+//        ByteArrayOutputStream bArray = new ByteArrayOutputStream();
+//        PrintStream printStream = new PrintStream(bArray);
+//        System.setOut(printStream);
+//        Printer printer = new Printer(System.out);
+//        //when
+//        printer.printFinalMessage(true, 1000, "har");
+//        System.setOut(console);
+//        //then
+//        SoftAssert softAssert = new SoftAssert();
+//        softAssert.assertTrue(bArray.toString().contains("har"));
+//        softAssert.assertTrue(bArray.toString().contains("Congrats! It's your new record har!"));
+//        softAssert.assertTrue(bArray.toString().contains("1000"));
+//        softAssert.assertAll();
+//
+//    }
 
     @Test(dataProvider = "provideName")
     public void nameShouldBeSetInConsole(String input, String output) {

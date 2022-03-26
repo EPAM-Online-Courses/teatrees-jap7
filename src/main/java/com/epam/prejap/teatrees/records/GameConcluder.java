@@ -2,7 +2,7 @@ package com.epam.prejap.teatrees.records;
 
 import com.epam.prejap.teatrees.game.Printer;
 
-import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -23,7 +23,13 @@ public class GameConcluder {
      */
     public void concludeTheGame(int score, Printer printer) {
         String nameOfThePlayer = printer.askForUserName(new Scanner(System.in));
-        boolean isNewBestRecord = new RecordHandler().handleNewRecord(new Record(nameOfThePlayer, score));
-        printer.printFinalMessage(isNewBestRecord, score, nameOfThePlayer);
+        boolean isNewBestRecord = false;
+        RecordHandler handler = new RecordHandler();
+        try {
+            isNewBestRecord = handler.handleNewRecord(new Record(nameOfThePlayer, score));
+        } catch (IOException e) {
+            System.err.println("Error during uploading .json file");
+        }
+        printer.printFinalMessage(handler.getHighScore(), isNewBestRecord, score, nameOfThePlayer);
     }
 }

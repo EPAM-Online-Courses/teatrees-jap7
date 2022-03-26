@@ -61,23 +61,10 @@ class TeaTrees {
         var printer = new Printer(System.out);
         var playfield = new Playfield(rows, cols, feed, printer);
         var game = new TeaTrees(playfield, new Waiter(delay), new RandomPlayer());
-
-
-        try {
-//            File jarDir = new File(ClassLoader.getSystemClassLoader().getResource(".").toURI());
-            File jarDir = new File(TeaTrees.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-            String parent = jarDir.getParent();
-            File newFile = new File(parent + "/temporary");
-            newFile.createNewFile();
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-
-//        var score = game.play();
+        var score = game.play();
 
         GameConcluder gameConcluder = new GameConcluder();
-
-        gameConcluder.concludeTheGame(1, printer);
+        gameConcluder.concludeTheGame(score.points(), printer);
     }
 
 }

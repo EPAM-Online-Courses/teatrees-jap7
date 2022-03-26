@@ -20,9 +20,9 @@ public class RecordCollector {
         return new ArrayList<>(records);
     }
 
-    void update(List<Record> newRecords) {
-        if (newRecords != null) {
-            records = newRecords;
+    void update(List<Record> records) {
+        if (records != null) {
+            this.records = records;
         }
     }
 

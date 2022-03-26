@@ -1,6 +1,9 @@
 package com.epam.prejap.teatrees.game;
 
+import com.epam.prejap.teatrees.records.Record;
+
 import java.io.PrintStream;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -57,7 +60,9 @@ public class Printer {
      * @param score           user's score, got during the game
      * @param nameOfThePlayer
      */
-    public void printFinalMessage(boolean isNewBestRecord, int score, String nameOfThePlayer) {
+    public void printFinalMessage(List<Record> scores, boolean isNewBestRecord, int score, String nameOfThePlayer) {
+        scores.forEach(System.out::println);
+
         System.out.println("\nScore: " + score);
         if (isNewBestRecord) {
             System.out.println("Congrats! It's your new record " + nameOfThePlayer + "!");

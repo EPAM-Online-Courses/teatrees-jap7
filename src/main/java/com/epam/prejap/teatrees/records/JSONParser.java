@@ -4,8 +4,9 @@ import com.google.gson.Gson;
 
 import java.io.*;
 import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.util.ArrayList;
+import java.nio.file.Path;
 import java.util.List;
 
 /**
@@ -17,66 +18,67 @@ import java.util.List;
  * @author Herman Kulik
  */
 class JSONParser {
-    private File externalFile;
+    private Path externalFile;
     private List<Record> recordsList;
     private RecordCollector recordCollector;
 
     JSONParser() {
         try {
-            File file = new File(JSONParser.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-            externalFile = new File(file.getParent() + "/external.json");
+            externalFile = Path.of(new File(JSONParser.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParent() + "/external.json");
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
     }
 
-
-    List<Record> getRecordsList() {
-        return new ArrayList<>(recordsList);
-    }
-
-    void uploadDataFromExternalJson() throws IOException {// tworzy tylko tu recordCollector
-        String parsedJSONData = new String(Files.readAllBytes(externalFile.toPath()));
+    List<Record> uploadDataFromExternalJson() throws IOException {
+        String parsedJSONData = new String(Files.readAllBytes(externalFile));
         recordCollector = new Gson().fromJson(parsedJSONData, RecordCollector.class);
         recordsList = recordCollector.getRecords();
+        return recordsList;
     }
 
-    void addNewRecordsToJSON(RecordCollector recordCollector) {
-        if (recordCollector == null) {
-            throw new IllegalArgumentException("Score is incorrect");
+    List<Record> uploadDataFromInternalJson() throws IOException {
+        String jsonInString = searchInsideJar();
+        Gson g = new Gson();
+        recordCollector = g.fromJson(jsonInString, RecordCollector.class);
+        recordsList = recordCollector.getRecords();
+        return recordsList;
+    }
+
+    private String searchInsideJar() throws IOException {
+        ClassLoader classLoader = getClass().getClassLoader();
+        InputStream inputStream = classLoader.getResourceAsStream("score.json");
+        if (inputStream == null) {
+            throw new IllegalArgumentException("file not found! " + "score.json");
         }
-        try (FileWriter writer = new FileWriter(externalFile)) {
-            Gson gson = new Gson();
-            gson.toJson(recordCollector, writer);
-        } catch (IOException e) {
-            System.err.println("Cannot write new data to score.json");
-        }
+        return new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
     }
 
-    void updateScore(List<Record> record) {
-        if(recordCollector == null){
-            recordCollector = new RecordCollector(new ArrayList<>());
-        }
-        recordCollector.update(record);
-        updateJsonFile();
+    void updateScores(List<Record> scores) {
+        recordCollector.update(scores);
+        clearJson();
+        addNewRecordsToJSON();
     }
 
-    private void updateJsonFile() { //TODO when updating file, should save in external file
-        clear();
-        addNewRecordsToJSON(recordCollector);
-    }
-
-    void clear() {
-        try {
-            if (!externalFile.exists()) {
-                externalFile.createNewFile();
+    void clearJson() {
+        try (FileWriter writer = new FileWriter(externalFile.toFile())) {
+            if (!Files.exists(externalFile)) {
+                Files.createFile(externalFile);
             } else {
-                FileWriter writer = new FileWriter(externalFile);
                 writer.write("");
                 writer.flush();
             }
         } catch (IOException e) {
             System.err.println(e.getMessage());
+        }
+    }
+
+    void addNewRecordsToJSON() {
+        try (FileWriter writer = new FileWriter(externalFile.toFile())) {
+            Gson gson = new Gson();
+            gson.toJson(recordCollector, writer);
+        } catch (IOException e) {
+            System.err.println("Cannot write new data to score.json");
         }
     }
 
