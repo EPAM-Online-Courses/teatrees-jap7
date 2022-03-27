@@ -20,6 +20,9 @@ class JSONParser {
     private final Path externalFile;
 
     JSONParser(Path externalFile) {
+        if(!externalFile.toString().endsWith(".json")){
+            throw new IllegalArgumentException();
+        }
         this.externalFile = externalFile;
     }
 

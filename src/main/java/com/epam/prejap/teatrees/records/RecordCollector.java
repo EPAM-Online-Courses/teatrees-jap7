@@ -20,12 +20,6 @@ public class RecordCollector {
         return new ArrayList<>(records);
     }
 
-    void update(List<Record> records) {
-        if (records != null) {
-            this.records = records;
-        }
-    }
-
     @Override
     public String toString() {
         return "RecordCollector{" +

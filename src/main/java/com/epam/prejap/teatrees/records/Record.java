@@ -10,7 +10,7 @@ public class Record implements Comparable<Record> {
     private final String name;
     private final int score;
 
-    Record(String name, int score) {
+    public Record(String name, int score) {
         this.name = name;
         this.score = score;
     }

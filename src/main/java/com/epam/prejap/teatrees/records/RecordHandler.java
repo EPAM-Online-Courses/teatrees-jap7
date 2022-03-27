@@ -33,7 +33,7 @@ class RecordHandler {
         return false;
     }
 
-    public List<Record> getRecordsList() {
+    List<Record> getRecordsList() {
         return new ArrayList<>(recordsList);
     }
 
