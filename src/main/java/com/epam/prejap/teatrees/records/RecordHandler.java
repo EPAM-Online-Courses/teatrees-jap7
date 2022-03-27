@@ -1,6 +1,5 @@
 package com.epam.prejap.teatrees.records;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -10,35 +9,17 @@ import java.util.List;
  * @author Herman Kulik
  */
 class RecordHandler {
-    private List<Record> recordsList;
-    private final JSONParser parser;
+    private final List<Record> recordsList;
 
-    RecordHandler() {
-        this.parser = new JSONParser();
+    RecordHandler(List<Record> recordsList) {
+        this.recordsList = recordsList;
     }
 
-    boolean handleNewRecord(Record newGameScore) throws IOException {
-        uploadJsonData();
-        boolean isNewRecord = verifyScore(newGameScore);
-        deployJsonData();
-
-        return isNewRecord;
-    }
-
-    void uploadJsonData() throws IOException {
-        try {
-            recordsList = parser.uploadDataFromExternalJson();
-        } catch (IOException e) {
-            recordsList = parser.uploadDataFromInternalJson();
-        }
-    }
-
-    void deployJsonData() {
-        parser.updateScores(recordsList);
-
-    }
-
-    private boolean verifyScore(Record newGameScore) {
+    /**
+     * @param newGameScore
+     * @return true if score is a new record
+     */
+    boolean addNewScore(Record newGameScore) {
         if (recordsList.contains(newGameScore)) {
             int indexOfOld = recordsList.indexOf(newGameScore);
             Record oldGameScore = recordsList.get(indexOfOld);
@@ -50,6 +31,10 @@ class RecordHandler {
             recordsList.add(newGameScore);
         }
         return false;
+    }
+
+    public List<Record> getRecordsList() {
+        return new ArrayList<>(recordsList);
     }
 
     List<Record> getHighScore() {

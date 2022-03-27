@@ -52,7 +52,7 @@ class TeaTrees {
     }
 
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         int rows = 10;
         int cols = 20;
         int delay = 500;
@@ -64,7 +64,11 @@ class TeaTrees {
         var score = game.play();
 
         GameConcluder gameConcluder = new GameConcluder();
-        gameConcluder.concludeTheGame(score.points(), printer);
+        try {
+            gameConcluder.concludeTheGame(score.points(), printer);
+        } catch (URISyntaxException | IOException e) {
+            System.err.println(e.getMessage());
+        }
     }
 
 }

@@ -3,7 +3,6 @@ package com.epam.prejap.teatrees.records;
 import com.google.gson.Gson;
 
 import java.io.*;
-import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -18,31 +17,34 @@ import java.util.List;
  * @author Herman Kulik
  */
 class JSONParser {
-    private Path externalFile;
-    private List<Record> recordsList;
-    private RecordCollector recordCollector;
+    private final Path externalFile;
 
-    JSONParser() {
-        try {
-            externalFile = Path.of(new File(JSONParser.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParent() + "/external.json");
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
+    JSONParser(Path externalFile) {
+        this.externalFile = externalFile;
     }
 
-    List<Record> uploadDataFromExternalJson() throws IOException {
-        String parsedJSONData = new String(Files.readAllBytes(externalFile));
-        recordCollector = new Gson().fromJson(parsedJSONData, RecordCollector.class);
-        recordsList = recordCollector.getRecords();
+    List<Record> uploadJsonData() throws IOException {
+        List<Record> recordsList;
+        try {
+            recordsList = uploadDataFromExternalJson();
+        } catch (IOException e) {
+            recordsList = uploadDataFromInternalJson();
+        }
         return recordsList;
     }
 
-    List<Record> uploadDataFromInternalJson() throws IOException {
+    private List<Record> uploadDataFromExternalJson() throws IOException {
+        String parsedJSONData = new String(Files.readAllBytes(externalFile));
+        RecordCollector recordCollector = new Gson().fromJson(parsedJSONData, RecordCollector.class);
+        return recordCollector.getRecords();
+
+    }
+
+    private List<Record> uploadDataFromInternalJson() throws IOException {
         String jsonInString = searchInsideJar();
         Gson g = new Gson();
-        recordCollector = g.fromJson(jsonInString, RecordCollector.class);
-        recordsList = recordCollector.getRecords();
-        return recordsList;
+        RecordCollector recordCollector = g.fromJson(jsonInString, RecordCollector.class);
+        return recordCollector.getRecords();
     }
 
     private String searchInsideJar() throws IOException {
@@ -55,12 +57,12 @@ class JSONParser {
     }
 
     void updateScores(List<Record> scores) {
-        recordCollector.update(scores);
-        clearJson();
-        addNewRecordsToJSON();
+        RecordCollector recordCollector = new RecordCollector(scores);
+        clearExternalJsonFile();
+        addNewRecordsToJSON(recordCollector);
     }
 
-    void clearJson() {
+    void clearExternalJsonFile() {
         try (FileWriter writer = new FileWriter(externalFile.toFile())) {
             if (!Files.exists(externalFile)) {
                 Files.createFile(externalFile);
@@ -73,7 +75,7 @@ class JSONParser {
         }
     }
 
-    void addNewRecordsToJSON() {
+    void addNewRecordsToJSON(RecordCollector recordCollector) {
         try (FileWriter writer = new FileWriter(externalFile.toFile())) {
             Gson gson = new Gson();
             gson.toJson(recordCollector, writer);

@@ -2,7 +2,11 @@ package com.epam.prejap.teatrees.records;
 
 import com.epam.prejap.teatrees.game.Printer;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Path;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -16,20 +20,20 @@ import java.util.Scanner;
 public class GameConcluder {
 
     /**
-     *
-     * @param score user's score, got during the game
-     * @param jsonFile a path to .json file, where all records are stored
-     * @param printer an object, responsible for interaction with user via console
+     * @param score    user's score, got during the game
+     * @param printer  an object, responsible for interaction with user via console
      */
-    public void concludeTheGame(int score, Printer printer) {
+    public void concludeTheGame(int score, Printer printer) throws URISyntaxException, IOException {
         String nameOfThePlayer = printer.askForUserName(new Scanner(System.in));
-        boolean isNewBestRecord = false;
-        RecordHandler handler = new RecordHandler();
-        try {
-            isNewBestRecord = handler.handleNewRecord(new Record(nameOfThePlayer, score));
-        } catch (IOException e) {
-            System.err.println("Error during uploading .json file");
-        }
-        printer.printFinalMessage(handler.getHighScore(), isNewBestRecord, score, nameOfThePlayer);
+
+        Path external = Path.of(new File(JSONParser.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParent() + "/external.json");
+        JSONParser parser = new JSONParser(external);
+        List<Record> allJsonRecords = parser.uploadJsonData();
+
+        RecordHandler handler = new RecordHandler(allJsonRecords);
+        boolean isNewRecord = handler.addNewScore(new Record(nameOfThePlayer, score));
+        parser.updateScores(handler.getRecordsList());
+
+        printer.printFinalMessage(handler.getHighScore(), isNewRecord, score, nameOfThePlayer);
     }
 }
