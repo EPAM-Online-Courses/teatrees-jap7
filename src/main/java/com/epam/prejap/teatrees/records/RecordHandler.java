@@ -14,11 +14,7 @@ class RecordHandler {
     RecordHandler(List<Record> recordsList) {
         this.recordsList = recordsList;
     }
-
-    /**
-     * @param newGameScore
-     * @return true if score is a new record
-     */
+    
     boolean addNewScore(Record newGameScore) {
         if (recordsList.contains(newGameScore)) {
             int indexOfOld = recordsList.indexOf(newGameScore);

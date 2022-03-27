@@ -48,6 +48,7 @@ public class PrinterTest {
     @Test(dataProvider = "provideName")
     public void nameShouldBeSetInConsole(String input, String output) {
         //given
+        System.setOut(new PrintStream(new ByteArrayOutputStream()));
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8));
         Printer printer = new Printer(System.out);
         //when

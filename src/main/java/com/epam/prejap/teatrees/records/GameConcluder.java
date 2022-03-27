@@ -10,9 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Summing up game flow, interacting with a user, using {@link Printer}
- * Start .json parsing, by {@link RecordHandler} methods invocation
- * Ties {@link RecordHandler} logic with {@link Printer} logic, to print appropriate message for user
+ * Sums up game flow, interacting with a user, using {@link Printer}.
  *
  * @author Andrzej Sadlek
  * @author Herman Kulik
@@ -20,8 +18,14 @@ import java.util.Scanner;
 public class GameConcluder {
 
     /**
-     * @param score    user's score, got during the game
-     * @param printer  an object, responsible for interaction with user via console
+     * Starts parsing .json file, using {@link JSONParser} object, and provides parsed elements.
+     * Provides parsed elements {@link Record} to {@link RecordHandler}, for further statistic operations.
+     * Passes top scores to {@link Printer}, to display results on screen.
+     *
+     * @param score   number of game points
+     * @param printer object, responsible for displaying game result
+     * @throws URISyntaxException if external path cannot be received
+     * @throws IOException        if .json file cannot be parsed
      */
     public void concludeTheGame(int score, Printer printer) throws URISyntaxException, IOException {
         String nameOfThePlayer = printer.askForUserName(new Scanner(System.in));

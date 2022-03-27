@@ -3,6 +3,9 @@ package com.epam.prejap.teatrees.records;
 import java.util.Objects;
 
 /**
+ * Represents a single score, parsed from .json file.
+ * Held by {@link RecordCollector} in collection with other scores.
+ *
  * @author Andrzej Sadlek
  * @author Herman Kulik
  */

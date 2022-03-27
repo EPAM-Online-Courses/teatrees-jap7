@@ -8,7 +8,7 @@ import java.util.List;
  * @author Herman Kulik
  */
 
-public class RecordCollector {
+class RecordCollector {
     private List<Record> records;
 
     RecordCollector(List<Record> records) {
