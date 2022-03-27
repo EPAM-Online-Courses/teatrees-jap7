@@ -8,15 +8,8 @@ import com.epam.prejap.teatrees.game.Waiter;
 import com.epam.prejap.teatrees.player.Player;
 import com.epam.prejap.teatrees.player.RandomPlayer;
 import com.epam.prejap.teatrees.records.GameConcluder;
-import com.epam.prejap.teatrees.records.RecordCollector;
-import com.google.gson.Gson;
-
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URISyntaxException;
-import java.nio.charset.StandardCharsets;
-import java.util.Objects;
 
 class TeaTrees {
 
