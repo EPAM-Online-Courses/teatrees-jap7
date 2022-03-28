@@ -20,6 +20,11 @@ public class TeaTrees {
         this.player = player;
     }
 
+    /**
+     * Method running the game, executing all possible moves in a loop and implementing desired delay between each step.
+     *
+     * @return total score achieved in this game
+     */
     public Score play() {
         boolean moved;
         int score = 0;

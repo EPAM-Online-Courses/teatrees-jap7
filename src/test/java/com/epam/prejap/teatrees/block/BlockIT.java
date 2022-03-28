@@ -16,11 +16,11 @@ import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 
 /**
+
  * An integration test is blocks.
  *
  * @author Krzysztof Jaczewski
  * @author Pawel Kierat
- */
 
 @Test
 public class BlockIT {
