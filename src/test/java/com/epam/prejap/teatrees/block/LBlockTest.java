@@ -31,12 +31,12 @@ public class LBlockTest {
     @DataProvider
     public static Object[][] dotPositions() {
         return new Object[][]{
-                {0, 0, 1, "Incorrect hashAt(0, 0)"},
-                {0, 1, 0, "Incorrect hashAt(0, 1)"},
-                {1, 0, 1, "Incorrect hashAt(1, 0)"},
-                {1, 1, 0, "Incorrect hashAt(1, 1)"},
-                {2, 0, 1, "Incorrect hashAt(2, 0)"},
-                {2, 1, 1, "Incorrect hashAt(2, 1)"}
+                {0, 0, 1, "Incorrect dotAt(0, 0)"},
+                {0, 1, 0, "Incorrect dotAt(0, 1)"},
+                {1, 0, 1, "Incorrect dotAt(1, 0)"},
+                {1, 1, 0, "Incorrect dotAt(1, 1)"},
+                {2, 0, 1, "Incorrect dotAt(2, 0)"},
+                {2, 1, 1, "Incorrect dotAt(2, 1)"}
         };
     }
 }
