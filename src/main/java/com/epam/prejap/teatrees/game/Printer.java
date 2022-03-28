@@ -61,11 +61,11 @@ public class Printer {
      * @param nameOfThePlayer
      */
     public void printFinalMessage(List<Record> scores, boolean isNewBestRecord, int score, String nameOfThePlayer) {
-        scores.forEach(System.out::println);
+        scores.forEach(out::println);
 
-        System.out.println("\nScore: " + score);
+        out.println("\nScore: " + score);
         if (isNewBestRecord) {
-            System.out.println("Congrats! It's your new record " + nameOfThePlayer + "!");
+            out.println("Congrats! It's your new record " + nameOfThePlayer + "!");
         }
     }
 
@@ -75,10 +75,10 @@ public class Printer {
      * @param scanner and object, responsible for scanning Player's output
      */
     public String askForUserName(Scanner scanner) {
-        System.out.println("Type your name (only 3 letters allowed): ");
+        out.println("Type your name (only 3 letters allowed): ");
         String nameOfThePlayer = scanner.nextLine();
         while (nameOfThePlayer.length() != 3) {
-            System.out.println("Retype your name! Only 3 letters are allowed!:");
+            out.println("Retype your name! Only 3 letters are allowed!:");
             nameOfThePlayer = scanner.nextLine();
         }
         return nameOfThePlayer;
