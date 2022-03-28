@@ -1,6 +1,6 @@
 package com.epam.prejap.teatrees;
 
-import com.epam.prejap.teatrees.block.BlockFeed;
+import com.epam.prejap.teatrees.block.RandomBlockFeed;
 import com.epam.prejap.teatrees.game.Move;
 import com.epam.prejap.teatrees.game.Playfield;
 import com.epam.prejap.teatrees.game.Printer;
@@ -8,7 +8,10 @@ import com.epam.prejap.teatrees.game.Waiter;
 import com.epam.prejap.teatrees.player.Player;
 import com.epam.prejap.teatrees.player.RandomPlayer;
 
-class TeaTrees {
+/**
+ * This is the main class to run the game.
+ */
+public class TeaTrees {
 
     private final Playfield playfield;
     private final Waiter waiter;
@@ -20,6 +23,11 @@ class TeaTrees {
         this.player = player;
     }
 
+    /**
+     * Method running the game, executing all possible moves in a loop and implementing desired delay between each step.
+     *
+     * @return total score achieved in this game
+     */
     public Score play() {
         boolean moved;
         int score = 0;
@@ -48,7 +56,7 @@ class TeaTrees {
         int cols = 20;
         int delay = 500;
 
-        var feed = new BlockFeed();
+        var feed = new RandomBlockFeed();
         var printer = new Printer(System.out);
         var playfield = new Playfield(rows, cols, feed, printer);
         var game = new TeaTrees(playfield, new Waiter(delay), new RandomPlayer());
