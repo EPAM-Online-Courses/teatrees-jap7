@@ -41,7 +41,8 @@ public class BlockIT {
         return new Object[] {
                 new BlockIT(new OBlock(), "|##|\n|##|\n"),
                 new BlockIT(new TBlock(), "|###|\n| # |\n"),
-                new BlockIT(new LBlock(), "|# |\n|# |\n|##|\n")
+                new BlockIT(new LBlock(), "|# |\n|# |\n|##|\n"),
+                new BlockIT(new IBlock(), "| #|\n| #|\n| #|\n| #|\n")
         };
     }
 
