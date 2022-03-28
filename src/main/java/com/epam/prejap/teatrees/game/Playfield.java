@@ -17,6 +17,11 @@ public class Playfield {
         this.printer = printer;
         grid = new Grid(rows, cols);
     }
+    Playfield(Grid grid, BlockFeed feed, Printer printer) {
+        this.feed = feed;
+        this.printer = printer;
+        this.grid = grid;
+    }
 
     public void nextBlock() {
         block = feed.nextBlock();
