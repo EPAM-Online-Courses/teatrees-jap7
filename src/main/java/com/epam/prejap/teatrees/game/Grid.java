@@ -7,6 +7,7 @@ import java.util.stream.IntStream;
 
 /**
  * Provides Playfield an api for working with 2D array.
+ *
  * @author Dominik Kaminski
  * @author Przemyslaw Szewczyk
  */
@@ -50,11 +51,15 @@ final class Grid {
      */
     void removeCompleteLines() {
         for (int i = rows - 1; i >= 0; i--) {
-            if (!isHeterogeneous(i) && grid.get(i).get(0) == 1) {
+            if (isRowDestinedToBeRemoved(i)) {
                 swapCompleteLineForEmptyOne(i);
                 i++;
             }
         }
+    }
+
+    private boolean isRowDestinedToBeRemoved(int i) {
+        return !isHeterogeneous(i) && grid.get(i).get(0) == 1;
     }
 
     private void swapCompleteLineForEmptyOne(int i) {
