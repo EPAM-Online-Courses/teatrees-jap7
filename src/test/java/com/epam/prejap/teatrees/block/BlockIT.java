@@ -41,6 +41,7 @@ public class BlockIT {
         return new Object[] {
             new BlockIT(new OBlock(), "|##|\n|##|\n"),
                 new BlockIT(new UBlock(), "|# #|\n|###|\n"),
+
         };
     }
 
@@ -60,6 +61,7 @@ public class BlockIT {
         //given
         //when
         teatrees.play();
+        //when
         String outputFromConsole = outputStream.toString();
         //then
         System.out.println(outputFromConsole);
