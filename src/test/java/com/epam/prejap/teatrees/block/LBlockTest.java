@@ -22,14 +22,14 @@ public class LBlockTest {
         assertEquals(actual, expected);
     }
 
-    @Test(dataProvider = "hashPositions")
+    @Test(dataProvider = "dotPositions")
     public void dotAtShouldReturnCorrectValue(int row, int col, int expected, String message) {
         int actual = lBlock.dotAt(row, col);
         assertEquals(actual, expected, message);
     }
 
     @DataProvider
-    public static Object[][] hashPositions() {
+    public static Object[][] dotPositions() {
         return new Object[][]{
                 {0, 0, 1, "Incorrect hashAt(0, 0)"},
                 {0, 1, 0, "Incorrect hashAt(0, 1)"},
