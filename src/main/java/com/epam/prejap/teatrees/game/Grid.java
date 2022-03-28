@@ -32,20 +32,11 @@ final class Grid {
     }
 
     private List<List<Byte>> translateMatrix(byte[][] matrix) {
-//        return IntStream.range(0, matrix.length - 1)
-//                        .mapToObj(i -> IntStream.range(0, matrix[i].length - 1)
-//                                                .mapToObj(j -> new Byte((byte) j))
-//                                                .collect(Collectors.toCollection(ArrayList::new)))
-//                        .collect(Collectors.toCollection(LinkedList::new));
-        List<List<Byte>> grid = new LinkedList<List<Byte>>();
-        for (byte[] bytes : matrix) {
-            List<Byte> row = new ArrayList<>(bytes.length);
-            for (byte aByte : bytes) {
-                row.add(aByte);
-            }
-            grid.add(row);
-        }
-        return grid;
+        return IntStream.range(0, matrix.length)
+                        .mapToObj(i -> IntStream.range(0, matrix[i].length)
+                                                .mapToObj(j -> new Byte(matrix[i][j]))
+                                                .collect(Collectors.toCollection(ArrayList::new)))
+                        .collect(Collectors.toCollection(LinkedList::new));
     }
 
     int cellAt(int row, int col) {
