@@ -6,7 +6,7 @@
 
     <groupId>com.epam.prejap</groupId>
     <artifactId>tea-trees</artifactId>
-    <version>0.4</version>
+    <version>0.5</version>
 
     <properties>
         <version.java>17</version.java>
