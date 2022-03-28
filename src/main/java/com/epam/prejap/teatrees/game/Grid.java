@@ -3,6 +3,7 @@ package com.epam.prejap.teatrees.game;
 import com.epam.prejap.teatrees.block.Block;
 
 import java.util.*;
+import java.util.stream.IntStream;
 
 /**
  * Provides Playfield an api for working with 2D array.
@@ -45,61 +46,32 @@ final class Grid {
     }
 
     /**
-     * It works like this - firstly it finds the first row (counting from the bottom) that has only zeros and sets it
-     * as a bound. Secondly it counts how many times line removal occurred. Finally, it creates new lines below the bound.
-     * Obviously number of created lines is equal to the number of removed lines.
+     * It removes complete lines and adds empty lines at the top of the grid.
      */
     void removeCompleteLines() {
-        boolean[] fallingRows = new boolean[rows];
-        int bound = getWorkAreaBound(fallingRows);
-        int counter = getNumberOfLinesThatNeedToBeRemoved(fallingRows, bound);
-        removeMarkedLines(fallingRows, bound);
-        fillEmptySpace(bound, counter);
-    }
-
-    private void removeMarkedLines(boolean[] fallingRows, int bound) {
-        for (int i = rows - 1; i > bound; i--)
-        {
-            if (!fallingRows[i]) {
-                grid.remove(i);
-            }
-        }
-    }
-
-    private void fillEmptySpace(int bound, int counter) {
-        while (counter > 1) {
-            grid.add(bound, new ArrayList<>(grid.get(bound)));
-            counter--;
-        }
-    }
-
-    private int getNumberOfLinesThatNeedToBeRemoved(boolean[] fallingRows, int bound) {
-        int counter = 0;
-        for (int i = rows - 1; i >= bound; i--) {
-            if (!fallingRows[i]) counter++;
-        }
-        return counter;
-    }
-
-    int getWorkAreaBound(boolean[] fallingRows) {
-        int bound = 0;
         for (int i = rows - 1; i >= 0; i--) {
-            fallingRows[i] = isHeterogeneous(i);
-            if (!fallingRows[i] && grid.get(i).get(0) == 0) {
-                bound = i;
-                break;
+            if (!isHeterogeneous(i) && grid.get(i).get(0) == 1) {
+                swapCompleteLineForEmptyOne(i);
+                i++;
             }
         }
-        return bound;
+    }
+
+    private void swapCompleteLineForEmptyOne(int i) {
+        grid.remove(i);
+        addEmptyLine();
+    }
+
+    private void addEmptyLine() {
+        grid.add(0, new ArrayList<>(getEmptyRow()));
+    }
+
+    private List<Byte> getEmptyRow() {
+        return IntStream.range(0, cols).mapToObj(i -> new Byte((byte) 0)).toList();
     }
 
     private boolean isHeterogeneous(int i) {
-        for (int j = 1; j < cols; j++) {
-            if (!grid.get(i).get(j).equals(grid.get(i).get(j - 1))) {
-                return true;
-            }
-        }
-        return false;
+        return IntStream.range(0, cols - 1).anyMatch(j -> !grid.get(i).get(j).equals(grid.get(i).get(j + 1)));
     }
 
     @Override
