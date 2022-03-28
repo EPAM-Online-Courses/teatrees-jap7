@@ -16,10 +16,10 @@ import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 
 /**
- * This test class is intended to contain any other block tests apart from TBlock integration test.
- * Feel free to implement more!
+ * An integration test is blocks.
  *
  * @author Krzysztof Jaczewski
+ * @author Pawel Kierat
  */
 
 @Test
@@ -39,7 +39,9 @@ public class BlockIT {
     @Factory
     static Object[] blockTests() {
         return new Object[] {
-            new BlockIT(new OBlock(), "|##|\n|##|\n"),
+                new BlockIT(new OBlock(), "|##|\n|##|\n"),
+                new BlockIT(new TBlock(), "|###|\n| # |\n"),
+                new BlockIT(new LBlock(), "|# |\n|# |\n|##|\n")
         };
     }
 
@@ -61,7 +63,6 @@ public class BlockIT {
         //when
         String outputFromConsole = outputStream.toString();
         //then
-        System.out.println(outputFromConsole);
         assertThat(outputFromConsole).contains(blockLines);
     }
 
