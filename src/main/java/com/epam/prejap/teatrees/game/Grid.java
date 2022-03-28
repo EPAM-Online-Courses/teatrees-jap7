@@ -3,6 +3,7 @@ package com.epam.prejap.teatrees.game;
 import com.epam.prejap.teatrees.block.Block;
 
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
@@ -22,7 +23,20 @@ final class Grid {
         this.cols = cols;
     }
 
+    Grid(int rows, int cols) {
+        this(new byte[rows][cols], rows, cols);
+    }
+
+    Grid(byte[][] grid) {
+        this(grid, grid.length, grid[0].length);
+    }
+
     private List<List<Byte>> translateMatrix(byte[][] matrix) {
+//        return IntStream.range(0, matrix.length - 1)
+//                        .mapToObj(i -> IntStream.range(0, matrix[i].length - 1)
+//                                                .mapToObj(j -> new Byte((byte) j))
+//                                                .collect(Collectors.toCollection(ArrayList::new)))
+//                        .collect(Collectors.toCollection(LinkedList::new));
         List<List<Byte>> grid = new LinkedList<List<Byte>>();
         for (byte[] bytes : matrix) {
             List<Byte> row = new ArrayList<>(bytes.length);
@@ -34,16 +48,16 @@ final class Grid {
         return grid;
     }
 
-    Grid(int rows, int cols) {
-        this(new byte[rows][cols], rows, cols);
-    }
-
-    Grid(byte[][] grid) {
-        this(grid, grid.length, grid[0].length);
-    }
-
     int cellAt(int row, int col) {
         return grid.get(row).get(col);
+    }
+
+    int getNumberOfRows() {
+        return rows;
+    }
+
+    int getNumberOfCols() {
+        return cols;
     }
 
     /**
@@ -72,43 +86,11 @@ final class Grid {
     }
 
     private List<Byte> getEmptyRow() {
-        return IntStream.range(0, cols).mapToObj(i -> new Byte((byte) 0)).toList();
+        return IntStream.range(0, cols).mapToObj(i -> new Byte((byte) 0)).collect(Collectors.toCollection(ArrayList::new));
     }
 
     private boolean isHeterogeneous(int i) {
         return IntStream.range(0, cols - 1).anyMatch(j -> !grid.get(i).get(j).equals(grid.get(i).get(j + 1)));
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Grid grid1 = (Grid) o;
-        return rows == grid1.rows && cols == grid1.cols && grid.equals(grid1.grid);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = Objects.hash(rows, cols);
-        result = 31 * result + Objects.hashCode(grid);
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "Grid{" +
-                "grid=" + grid +
-                ", rows=" + rows +
-                ", cols=" + cols +
-                '}';
-    }
-
-    int getNumberOfRows() {
-        return rows;
-    }
-
-    int getNumberOfCols() {
-        return cols;
     }
 
     void hideBlock(Block block, int row, int col) {
@@ -136,6 +118,10 @@ final class Grid {
         }
     }
 
+    private interface BrickAction {
+        void act(int i, int j, byte dot);
+    }
+
     void print(Printer printer) {
         printer.clear();
         printer.border(cols);
@@ -153,7 +139,27 @@ final class Grid {
         }
     }
 
-    private interface BrickAction {
-        void act(int i, int j, byte dot);
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Grid grid1 = (Grid) o;
+        return rows == grid1.rows && cols == grid1.cols && grid.equals(grid1.grid);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(rows, cols);
+        result = 31 * result + Objects.hashCode(grid);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Grid{" +
+                "grid=" + grid +
+                ", rows=" + rows +
+                ", cols=" + cols +
+                '}';
     }
 }
