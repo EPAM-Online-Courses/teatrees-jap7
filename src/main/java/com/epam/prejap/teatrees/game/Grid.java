@@ -85,17 +85,11 @@ final class Grid {
     }
 
     void hideBlock(Block block, int row, int col) {
-        forEachBrick(block, (i, j, dot) -> {
-            Byte aByte = grid.get(row + i).get(col + j);
-            aByte = 0;
-        });
+        forEachBrick(block, (i, j, dot) -> grid.get(row + i).set(col + j, (byte) 0));
     }
 
     void showBlock(Block block, int row, int col) {
-        forEachBrick(block, (i, j, dot) -> {
-            Byte aByte = grid.get(row + i).get(col + j);
-            aByte = dot;
-        });
+        forEachBrick(block, (i, j, dot) -> grid.get(row + i).set(col + j, dot));
     }
 
     private void forEachBrick(Block block, BrickAction action) {
