@@ -1,7 +1,12 @@
 package com.epam.prejap.teatrees.game;
 
+import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
+import java.io.ByteArrayOutputStream;
+import java.io.OutputStream;
+import java.io.PrintStream;
 
 import static org.testng.Assert.*;
 
@@ -29,6 +34,24 @@ public class GridTest {
         grid.removeCompleteLines();
         // then
         assertEquals(grid, expectedGrid);
+    }
+
+    @Test
+    public void shouldPrintProperly() {
+        // given
+        OutputStream out = new ByteArrayOutputStream();
+        Grid grid = new Grid(new byte[][] {{0,0,0}, {1,1,0}, {1,1,0}});
+        String expected = """
+                +---+
+                |   |
+                |## |
+                |## |
+                +---+
+                """;
+        // when
+        grid.print(new Printer(new PrintStream(out)));
+        // then
+        Assert.assertTrue(out.toString().endsWith(expected));
     }
 
     @DataProvider
