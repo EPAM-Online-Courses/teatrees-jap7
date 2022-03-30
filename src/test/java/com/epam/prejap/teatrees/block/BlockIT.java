@@ -39,9 +39,11 @@ public class BlockIT {
     @Factory
     static Object[] blockTests() {
         return new Object[] {
+
                 new BlockIT(new OBlock(), "|##|\n|##|\n"),
                 new BlockIT(new TBlock(), "|###|\n| # |\n"),
-                new BlockIT(new LBlock(), "|# |\n|# |\n|##|\n")
+                new BlockIT(new LBlock(), "|# |\n|# |\n|##|\n"),
+                new BlockIT(new UBlock(), "|# #|\n|###|\n"),
         };
     }
 
@@ -59,7 +61,8 @@ public class BlockIT {
     @Test
     public void shouldDisplayBlock() {
         //given
-        var game = teatrees.play();
+        //when
+        teatrees.play();
         //when
         String outputFromConsole = outputStream.toString();
         //then
