@@ -10,19 +10,6 @@ public class Printer {
         this.out = out;
     }
 
-    void draw(byte[][] grid) {
-        clear();
-        border(grid[0].length);
-        for (byte[] bytes : grid) {
-            startRow();
-            for (byte aByte : bytes) {
-                print(aByte);
-            }
-            endRow();
-        }
-        border(grid[0].length);
-    }
-
     void clear() {
         out.print("\u001b[2J\u001b[H");
     }
