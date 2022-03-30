@@ -9,7 +9,11 @@ public class RandomBlockFeed implements BlockFeed {
     private final Random rnd;
     private final List<Supplier<Block>> blocks = List.of(
         OBlock::new,
-        TBlock::new
+        TBlock::new,
+        LBlock::new,
+        IBlock::new,
+        JBlock::new
+
     );
 
     public RandomBlockFeed() {
