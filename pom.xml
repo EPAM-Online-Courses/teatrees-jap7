@@ -6,7 +6,7 @@
 
     <groupId>com.epam.prejap</groupId>
     <artifactId>tea-trees</artifactId>
-    <version>0.2</version>
+    <version>0.6</version>
 
     <properties>
         <version.java>17</version.java>
@@ -14,9 +14,10 @@
         <maven.compiler.source>${version.java}</maven.compiler.source>
         <maven.compiler.target>${version.java}</maven.compiler.target>
         <version.maven>3.8.1</version.maven>
+        <version.plugin.maven.testing>2.22.2</version.plugin.maven.testing>
         <version.plugin.maven.enforcer>3.0.0-M2</version.plugin.maven.enforcer>
         <version.plugin.maven.jar>3.2.0</version.plugin.maven.jar>
-        <version.testng>7.4.0</version.testng>
+        <version.testng>7.5</version.testng>
     </properties>
 
     <dependencies>
@@ -26,10 +27,35 @@
             <version>${version.testng}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.22.0</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.7</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -38,10 +64,57 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>com.epam.prejap.tetris.Tetris</mainClass>
+                            <mainClass>com.epam.prejap.teatrees.TeaTrees</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${version.plugin.maven.testing}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>${version.plugin.maven.testing}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>3.1.2</version>
+                <configuration>
+                    <configLocation>checkstyle.xml</configLocation>
+                    <encoding>UTF-8</encoding>
+                    <consoleOutput>true</consoleOutput>
+                    <failsOnError>true</failsOnError>
+                    <linkXRef>false</linkXRef>
+                    <violationSeverity>error</violationSeverity>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>validate</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.puppycrawl.tools</groupId>
+                        <artifactId>checkstyle</artifactId>
+                        <version>10.0</version>
+                    </dependency>
+                </dependencies>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -68,5 +141,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
