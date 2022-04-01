@@ -8,8 +8,9 @@ public class RandomBlockFeed implements BlockFeed {
 
     private final Random rnd;
     private final List<Supplier<Block>> blocks = List.of(
-        OBlock::new,
-        TBlock::new
+            OBlock::new,
+            TBlock::new,
+            LBlock::new
     );
 
     public RandomBlockFeed() {
