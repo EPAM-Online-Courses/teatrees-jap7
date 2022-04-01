@@ -6,7 +6,7 @@ public abstract class Block {
     final int rows;
     final int cols;
 
-    Block(byte[][] dots) {
+    protected Block(byte[][] dots) {
         rows = dots.length;
         if (dots.length == 0) {
             throw new IllegalArgumentException("Image has height equal to 0");
