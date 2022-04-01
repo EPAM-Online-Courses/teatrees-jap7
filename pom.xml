@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.epam.prejap</groupId>
     <artifactId>tea-trees</artifactId>
     <version>0.5</version>
 
-<properties>
-    <version.java>17</version.java>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>${version.java}</maven.compiler.source>
-    <maven.compiler.target>${version.java}</maven.compiler.target>
-    <version.maven>3.8.1</version.maven>
-    <version.plugin.maven.testing>2.22.2</version.plugin.maven.testing>
-    <version.plugin.maven.enforcer>3.0.0-M2</version.plugin.maven.enforcer>
-    <version.plugin.maven.jar>3.2.0</version.plugin.maven.jar>
-    <version.testng>7.5</version.testng>
-</properties>
+    <properties>
+        <version.java>17</version.java>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>${version.java}</maven.compiler.source>
+        <maven.compiler.target>${version.java}</maven.compiler.target>
+        <version.maven>3.8.1</version.maven>
+        <version.plugin.maven.testing>2.22.2</version.plugin.maven.testing>
+        <version.plugin.maven.enforcer>3.0.0-M2</version.plugin.maven.enforcer>
+        <version.plugin.maven.jar>3.2.0</version.plugin.maven.jar>
+        <version.testng>7.5</version.testng>
+    </properties>
 
 <dependencies>
     <dependency>

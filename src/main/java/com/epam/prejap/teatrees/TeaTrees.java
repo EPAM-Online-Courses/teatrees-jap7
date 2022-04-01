@@ -8,9 +8,6 @@ import com.epam.prejap.teatrees.game.Waiter;
 import com.epam.prejap.teatrees.player.Player;
 import com.epam.prejap.teatrees.player.RandomPlayer;
 
-/**
- * This is the main class to run the game.
- */
 public class TeaTrees {
 
     private final Playfield playfield;
