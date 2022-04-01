@@ -43,6 +43,9 @@ public class Printer {
         out.println("+" + "-".repeat(width) + "+");
     }
 
+    /**
+     * Prints a welcome message at the beginning of the program within 3 seconds.
+     */
     public void printWelcomeMsg() {
         out.println("""
                 _|          _|              _|                                                   \s
