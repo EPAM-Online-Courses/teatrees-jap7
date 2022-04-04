@@ -10,13 +10,12 @@ public class RandomBlockFeed implements BlockFeed {
     private final List<Supplier<Block>> blocks = List.of(
         OBlock::new,
         TBlock::new,
-        LBlock::new,
         IBlock::new,
         JBlock::new
-
     );
 
-    public RandomBlockFeed() {
+    public RandomBlockFeed()
+    {
         rnd = new Random();
     }
 
