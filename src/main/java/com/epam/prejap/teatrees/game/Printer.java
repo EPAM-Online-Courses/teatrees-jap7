@@ -1,7 +1,17 @@
 package com.epam.prejap.teatrees.game;
 
-import java.io.PrintStream;
+import com.epam.prejap.teatrees.records.Record;
 
+import java.io.PrintStream;
+import java.util.List;
+import java.util.Scanner;
+
+/**
+ * Responsible for printing grid, blocks and messages to console
+ *
+ * @author Andrzej Sadlek
+ * @author Herman Kulik
+ */
 public class Printer {
 
     final PrintStream out;
@@ -15,7 +25,7 @@ public class Printer {
     }
 
     void print(byte dot) {
-        out.format(dot == 0 ? " " :"#");
+        out.format(dot == 0 ? " " : "#");
     }
 
     void startRow() {
@@ -29,4 +39,22 @@ public class Printer {
     void border(int width) {
         out.println("+" + "-".repeat(width) + "+");
     }
+
+    /**
+     * Prints the concluding message about achieved score. In case of new record prints additional message.
+     *
+     * @param result indicates whether new score is the best yet for the Player
+     * @param score  user's score, got during the game
+     * @param name
+     */
+    public void printFinalMessage(List<Record> scores, boolean result, int score, String name) {
+        scores.forEach(out::println);
+
+        out.println("\nScore: " + score);
+        if (result) {
+            out.println("Congrats! It's your new record " + name + "!");
+        }
+    }
+
+
 }
