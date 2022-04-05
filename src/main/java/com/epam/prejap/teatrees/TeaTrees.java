@@ -1,13 +1,11 @@
 package com.epam.prejap.teatrees;
 
 import com.epam.prejap.teatrees.block.RandomBlockFeed;
-import com.epam.prejap.teatrees.game.Move;
-import com.epam.prejap.teatrees.game.Playfield;
-import com.epam.prejap.teatrees.game.Printer;
-import com.epam.prejap.teatrees.game.Waiter;
+import com.epam.prejap.teatrees.game.*;
 import com.epam.prejap.teatrees.player.Player;
 import com.epam.prejap.teatrees.player.RandomPlayer;
 import com.epam.prejap.teatrees.records.GameConcluder;
+
 import java.io.IOException;
 import java.net.URISyntaxException;
 
@@ -54,7 +52,6 @@ public class TeaTrees {
         return new Score(score);
     }
 
-
     public static void main(String[] args) {
         int rows = 10;
         int cols = 20;
@@ -67,8 +64,9 @@ public class TeaTrees {
         var score = game.play();
 
         GameConcluder gameConcluder = new GameConcluder();
+        GameScanner scanner = new GameScanner(System.out);
         try {
-            gameConcluder.concludeTheGame(score.points(), printer);
+            gameConcluder.concludeTheGame(score.points(), printer, scanner);
         } catch (URISyntaxException | IOException e) {
             System.err.println(e.getMessage());
         }

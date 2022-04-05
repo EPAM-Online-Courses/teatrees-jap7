@@ -1,5 +1,6 @@
 package com.epam.prejap.teatrees.records;
 
+import com.epam.prejap.teatrees.game.GameScanner;
 import com.epam.prejap.teatrees.game.Printer;
 
 import java.io.File;
@@ -27,8 +28,8 @@ public class GameConcluder {
      * @throws URISyntaxException if external path cannot be received
      * @throws IOException        if .json file cannot be parsed
      */
-    public void concludeTheGame(int score, Printer printer) throws URISyntaxException, IOException {
-        String nameOfThePlayer = printer.askForUserName(new Scanner(System.in));
+    public void concludeTheGame(int score, Printer printer, GameScanner scanner) throws URISyntaxException, IOException {
+        String nameOfThePlayer = scanner.askForUserName(new Scanner(System.in));
 
         Path external = Path.of(new File(JSONParser.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParent() + "/external.json");
         JSONParser parser = new JSONParser(external);

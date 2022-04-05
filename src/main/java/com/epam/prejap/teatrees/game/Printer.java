@@ -43,31 +43,18 @@ public class Printer {
     /**
      * Prints the concluding message about achieved score. In case of new record prints additional message.
      *
-     * @param isNewBestRecord indicates whether new score is the best yet for the Player
-     * @param score           user's score, got during the game
-     * @param nameOfThePlayer
+     * @param result indicates whether new score is the best yet for the Player
+     * @param score  user's score, got during the game
+     * @param name
      */
-    public void printFinalMessage(List<Record> scores, boolean isNewBestRecord, int score, String nameOfThePlayer) {
+    public void printFinalMessage(List<Record> scores, boolean result, int score, String name) {
         scores.forEach(out::println);
 
         out.println("\nScore: " + score);
-        if (isNewBestRecord) {
-            out.println("Congrats! It's your new record " + nameOfThePlayer + "!");
+        if (result) {
+            out.println("Congrats! It's your new record " + name + "!");
         }
     }
 
-    /**
-     * Asks Player for his name that can be only 3 characters long.
-     *
-     * @param scanner and object, responsible for scanning Player's output
-     */
-    public String askForUserName(Scanner scanner) {
-        out.println("Type your name (only 3 letters allowed): ");
-        String nameOfThePlayer = scanner.nextLine();
-        while (nameOfThePlayer.length() != 3) {
-            out.println("Retype your name! Only 3 letters are allowed!:");
-            nameOfThePlayer = scanner.nextLine();
-        }
-        return nameOfThePlayer;
-    }
+
 }
