@@ -17,7 +17,7 @@
     <version.plugin.maven.testing>2.22.2</version.plugin.maven.testing>
     <version.plugin.maven.enforcer>3.0.0-M2</version.plugin.maven.enforcer>
     <version.plugin.maven.jar>3.2.0</version.plugin.maven.jar>
-    <version.testng>7.5</version.testng>
+    <version.testng>7.7.0</version.testng>
 </properties>
 
 <dependencies>
